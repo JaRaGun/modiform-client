@@ -21,8 +21,8 @@ const Login = () => {
               backgroundPosition: "center",
             }}
           >
-            {/* <div className="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
-              <div>
+            <div className="flex items-center h-full px-20 bg-gray-900 bg-opacity-40 ">
+              <div className="mt-80">
                 <h2 className="text-2xl font-bold text-white sm:text-3xl">
                   MODIFORM
                 </h2>
@@ -32,7 +32,7 @@ const Login = () => {
                   libero suscipit nam temporibus molestiae
                 </p>
               </div>
-            </div> */}
+            </div>
           </div>
           <div className="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
             <div className="flex-1">
