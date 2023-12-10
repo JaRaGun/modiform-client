@@ -1,7 +1,15 @@
 import { Button, TextField } from "@mui/material";
 import images from "../../themes/images";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+
+  const navigate = useNavigate();
+
+  const handleSignIn = () => {
+    navigate("/home");
+  };
+
   return (
     <>
       <div className="bg-white">
@@ -62,10 +70,10 @@ const Login = () => {
                     />
 
                     {/*  type="submit" */}
-                    <Button fullWidth variant="contained">
+                    <Button onClick={handleSignIn} fullWidth variant="contained">
                       Sign In
                     </Button>
-                    
+
                   </div>
                 </form>
               </div>
