@@ -9,6 +9,7 @@ const MainRoutes = () => {
       </Route> */}
 
       <Route element={<Login />} path="/" />
+      
     </Routes>
   );
 };
