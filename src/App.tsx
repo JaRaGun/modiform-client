@@ -7,9 +7,7 @@ function App() {
           className="w-auto h-36 rounded-md"
         />
       </div>
-      <h1 className="text-3xl font-bold mb-4 text-white">
-        Vite + React + Firebase + RTK
-      </h1>
+      <h1 className="text-3xl font-bold mb-4 text-white"></h1>
       <div className="card bg-white p-4 rounded-md shadow-md mt-4">
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
