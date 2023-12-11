@@ -20,7 +20,6 @@ const Home = () => {
         style={{
           backgroundImage: `url(${images.BLURRYBG})`,
           backgroundSize: "cover",
-          minHeight: "calc(100vh + 130px)",
           backgroundPosition: "center",
         }}
       >
@@ -64,6 +63,8 @@ const Home = () => {
             </div>
           </div>
         </div>
+
+        <div className="py-10"></div>
       </div>
     </div>
   );
