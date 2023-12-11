@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import Navbar from "../../components/navbar/Navbar";
 import images from "../../themes/images";
+import { Contact } from "..";
 
 const Home = () => {
   return (
@@ -11,7 +12,7 @@ const Home = () => {
         style={{
           backgroundImage: `url(${images.HOMEBG})`,
           backgroundSize: "cover",
-          minHeight: "calc(100dvh + 130px)",
+          minHeight: "calc(100vh + 200px)",
           backgroundPosition: "center",
         }}
       ></div>
@@ -66,6 +67,8 @@ const Home = () => {
 
         <div className="py-10"></div>
       </div>
+
+      <Contact />
     </div>
   );
 };

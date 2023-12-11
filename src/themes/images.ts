@@ -7,5 +7,6 @@ import BLURRYBG from '../assets/IMGS/BlurryBG.png'
 import COLLEGE from '../assets/IMGS/College.png'
 import SENIORHIGH from '../assets/IMGS/SeniorHigh.png'
 import OTHERS from '../assets/IMGS/Others.png'
+import CONTACTS from '../assets/IMGS/CONTACTS.png'
 
-export default { MODILOGO, BACKGROUNDSTI, WHITEMODIFORM, HOMEBG, BLURRYBG, COLLEGE, SENIORHIGH, OTHERS }
+export default { MODILOGO, BACKGROUNDSTI, WHITEMODIFORM, HOMEBG, BLURRYBG, COLLEGE, SENIORHIGH, OTHERS, CONTACTS }

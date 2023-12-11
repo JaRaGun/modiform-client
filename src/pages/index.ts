@@ -1,4 +1,6 @@
 import Login from "./Auth/Login";
 import Home from "./Home/Home";
+import Contact from "./Home/Contact";
 
-export { Login, Home };
+
+export { Login, Home, Contact };
