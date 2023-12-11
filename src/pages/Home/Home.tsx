@@ -60,7 +60,7 @@ const Home = () => {
               className="transition duration-300 ease-in-out"
             />
             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 text-white text-3xl text-center opacity-0 transition-opacity duration-300 ease-in-out group-hover:bg-opacity-50 group-hover:opacity-100">
-              OTHERS
+              OTHERSS
             </div>
           </div>
         </div>
