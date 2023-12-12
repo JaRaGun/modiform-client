@@ -1,7 +1,7 @@
-/** @type {import('tailwindcss').Config} */
-import { colors } from "./src/themes/color";
-export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+import withMT from "@material-tailwind/react/utils/withMT";
+import { colors } from "./src/themes/index";
+export default withMT({
+  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -12,4 +12,4 @@ export default {
     },
   },
   plugins: [],
-};
+});
