@@ -1,3 +1,4 @@
 import Navbar from "./navbar/Navbar";
+import Notifications from "./navbar/Notifications/Notifications";
 
-export default { Navbar };
+export default { Navbar, Notifications };

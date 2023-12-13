@@ -7,7 +7,10 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import images from "../../themes/images";
+import Notifications from "./Notifications/Notifications";
+
 import { useNavigate } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 const Navbar = () => {
   // FOR PROFILE
@@ -16,9 +19,6 @@ const Navbar = () => {
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -26,6 +26,10 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const handleLogOut = () => {
+    navigate("/");
+  };
+
+  const handleProfile = () => {
     navigate("/");
   };
 
@@ -42,40 +46,42 @@ const Navbar = () => {
           </div>
           <ul className="items-center hidden space-x-8 lg:flex">
             <li>
-              <a
-                href="/"
+              <RouterLink
+                to="/home"
                 aria-label="Home"
                 title="Home"
                 className="tracking-wide text-white hover:text-yellow-400 font-bold"
               >
                 HOME
-              </a>
+              </RouterLink>
             </li>
 
             <li>
-              <a
-                href="/"
-                aria-label="Home"
-                title="Home"
+              <RouterLink
+                to="/proware"
+                aria-label="PROWARE"
+                title="PROWARE"
                 className="tracking-wide text-white hover:text-yellow-400 font-bold"
               >
                 PROWARE
-              </a>
+              </RouterLink>
             </li>
 
             <li>
-              <a
-                href="/"
-                aria-label="Product pricing"
-                title="Product pricing"
+              <RouterLink
+                to="/contact"
+                aria-label="CONTACT US"
+                title="CONTACT US"
                 className="tracking-wide text-white hover:text-yellow-400 font-bold"
               >
                 CONTACT US
-              </a>
+              </RouterLink>
             </li>
           </ul>
 
           <ul className="items-center hidden lg:flex">
+            <Notifications />
+
             <React.Fragment>
               <Tooltip title="Account settings">
                 <IconButton
@@ -95,8 +101,6 @@ const Navbar = () => {
                 anchorEl={anchorEl}
                 id="account-menu"
                 open={open}
-                onClose={handleClose}
-                onClick={handleClose}
                 PaperProps={{
                   elevation: 0,
                   sx: {
@@ -126,9 +130,10 @@ const Navbar = () => {
                 transformOrigin={{ horizontal: "right", vertical: "top" }}
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               >
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={handleProfile}>
                   <Avatar /> Profile
                 </MenuItem>
+
                 <Divider />
                 <MenuItem onClick={handleLogOut}>Logout</MenuItem>
               </Menu>
@@ -158,64 +163,8 @@ const Navbar = () => {
               </svg>
             </button>
 
-            <ul className="items-center lg:flex">
-              <React.Fragment>
-                <Tooltip title="Account settings">
-                  <IconButton
-                    onClick={handleClick}
-                    size="small"
-                    sx={{ ml: 2 }}
-                    aria-controls={open ? "account-menu" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? "true" : undefined}
-                  >
-                    <Avatar sx={{ width: 32, height: 32 }}></Avatar>
-                  </IconButton>
-                </Tooltip>
-
-                <Menu
-                  className="w-86"
-                  anchorEl={anchorEl}
-                  id="account-menu"
-                  open={open}
-                  onClose={handleClose}
-                  onClick={handleClose}
-                  PaperProps={{
-                    elevation: 0,
-                    sx: {
-                      overflow: "visible",
-                      filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-                      mt: 1.5,
-                      "& .MuiAvatar-root": {
-                        width: 32,
-                        height: 32,
-                        ml: -0.5,
-                        mr: 1,
-                      },
-                      "&:before": {
-                        content: '""',
-                        display: "block",
-                        position: "absolute",
-                        top: 0,
-                        right: 14,
-                        width: 10,
-                        height: 10,
-                        bgcolor: "background.paper",
-                        transform: "translateY(-50%) rotate(45deg)",
-                        zIndex: 0,
-                      },
-                    },
-                  }}
-                  transformOrigin={{ horizontal: "right", vertical: "top" }}
-                  anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-                >
-                  <MenuItem onClick={handleClose}>
-                    <Avatar /> Profile
-                  </MenuItem>
-                  <Divider />
-                  <MenuItem onClick={handleLogOut}>Logout</MenuItem>
-                </Menu>
-              </React.Fragment>
+            <ul className="px-2 items-center lg:flex">
+              <Notifications />
             </ul>
 
             {isMenuOpen && (
@@ -254,36 +203,36 @@ const Navbar = () => {
                   <nav>
                     <ul className="space-y-4">
                       <li>
-                        <a
-                          href="/"
+                        <RouterLink
+                          to="/home"
                           aria-label="Home"
                           title="Home"
                           className="tracking-wide text-white hover:text-yellow-400 font-bold"
                         >
                           HOME
-                        </a>
+                        </RouterLink>
                       </li>
 
                       <li>
-                        <a
-                          href="/"
+                        <RouterLink
+                          to="/proware"
                           aria-label="Home"
                           title="Home"
                           className="tracking-wide text-white hover:text-yellow-400 font-bold"
                         >
                           PROWARE
-                        </a>
+                        </RouterLink>
                       </li>
 
                       <li>
-                        <a
-                          href="/"
+                        <RouterLink
+                          to="/contact"
                           aria-label="Product pricing"
                           title="Product pricing"
                           className="tracking-wide text-white hover:text-yellow-400 font-bold"
                         >
                           CONTACT US
-                        </a>
+                        </RouterLink>
                       </li>
 
                       <li>
@@ -298,14 +247,14 @@ const Navbar = () => {
                       </li>
 
                       <li>
-                        <a
-                          href="/"
+                        <RouterLink
+                          to="/"
                           className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white rounded shadow-md bg-gray-500 hover:bg-yellow-700"
                           aria-label="Sign up"
                           title="Sign up"
                         >
                           LOGOUT
-                        </a>
+                        </RouterLink>
                       </li>
                     </ul>
                   </nav>

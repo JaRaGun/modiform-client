@@ -1,7 +1,6 @@
 import { Button } from "@mui/material";
 import Navbar from "../../components/navbar/Navbar";
 import images from "../../themes/images";
-import { Contact } from "..";
 
 const Home = () => {
   return (
@@ -64,11 +63,9 @@ const Home = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="py-10"></div>
       </div>
-
-      <Contact />
     </div>
   );
 };
