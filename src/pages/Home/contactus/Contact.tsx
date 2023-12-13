@@ -1,5 +1,4 @@
-import { Button, TextField } from "@mui/material";
-import { Textarea } from "@material-tailwind/react";
+import { Textarea, Input, Button } from "@material-tailwind/react";
 import images from "../../../themes/images";
 import Navbar from "../../../components/navbar/Navbar";
 
@@ -14,19 +13,27 @@ const Contact = () => {
             <p className="text-sm mt-1">LET US KNOW YOUR CONCERN</p>
 
             <div className="space-y-5 mt-10">
-              <TextField fullWidth label="Full Name" variant="outlined" />
+              <Input
+                label="Full Name"
+                variant="outlined"
+                crossOrigin={undefined}
+              />
 
-              <TextField fullWidth label="Email" variant="outlined" />
+              <Input
+                label="Outlook Account/Email"
+                variant="outlined"
+                crossOrigin={undefined}
+              />
 
               <div className="w-full">
                 <Textarea label="Message" />
               </div>
 
               <Button
-                className="bg-SecondaryBG"
+                className="bg-blue-500 hover:bg-green-500 text-black font-base"
                 fullWidth
-                variant="contained"
-                size="large"
+                variant="filled"
+                placeholder={undefined}
               >
                 SEND MESSAGE
               </Button>

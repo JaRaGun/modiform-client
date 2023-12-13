@@ -6,40 +6,37 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
-import images from "../../themes/images";
 
-const ProwareItem = () => {
+interface ModiDescription {
+  uniPicture: any;
+  uniName: any;
+}
+
+const ProwareItem: React.FC<ModiDescription> = ({ uniPicture, uniName }) => {
   return (
-    <div>
-      <div className="flex">
-        <Card className="w-96" placeholder={undefined}>
+    <div className="px-10">
+      <div className="flex py-5">
+        <Card className="w-80 bg-yellow-100" placeholder={undefined}>
           <CardHeader
             shadow={false}
             floated={false}
-            className="h-96"
+            className="h-80"
             placeholder={undefined}
           >
             <img
-              src={images.BSITUNIFORM}
+              src={uniPicture}
               alt="card-image"
               className="h-full w-full object-cover"
             />
           </CardHeader>
           <CardBody placeholder={undefined}>
-            <div className="mb-2 flex items-center justify-between">
+            <div className="mb-2 text-center">
               <Typography
                 color="blue-gray"
-                className="font-medium"
+                className="font-extrabold"
                 placeholder={undefined}
               >
-                Apple AirPods
-              </Typography>
-              <Typography
-                color="blue-gray"
-                className="font-medium"
-                placeholder={undefined}
-              >
-                $95.00
+                {uniName}
               </Typography>
             </div>
           </CardBody>
@@ -47,7 +44,7 @@ const ProwareItem = () => {
             <Button
               ripple={false}
               fullWidth={true}
-              className="bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
+              className="bg-blue-500 text-black font-semibold shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
               placeholder={undefined}
             >
               Add to Cart
