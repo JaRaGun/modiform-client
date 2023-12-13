@@ -1,4 +1,4 @@
-import { Contact, Home, Login, Proware } from "../pages";
+import { Cart, Contact, Home, Login, Proware } from "../pages";
 import { Route, Routes } from "react-router-dom";
 // import PrivateRoutes from "./PrivateRoutes";
 const MainRoutes = () => {
@@ -12,6 +12,7 @@ const MainRoutes = () => {
       <Route element={<Home />} path="/home" />
       <Route element={<Contact />} path="/contact" />
       <Route element={<Proware />} path="/proware" />
+      <Route element={<Cart />} path="/cart" />
     </Routes>
   );
 };

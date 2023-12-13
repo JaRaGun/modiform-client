@@ -8,23 +8,27 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import images from "../../themes/images";
 import Notifications from "./Notifications/Notifications";
-
+import Badge from "@mui/material/Badge";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useNavigate } from "react-router-dom";
 import { Link as RouterLink } from "react-router-dom";
 
 const Navbar = () => {
+  // FOR RESPONSIVE
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   // FOR PROFILE
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   // HANDLE NAVIGATE (LOGOUT)
   const navigate = useNavigate();
-
   const handleLogOut = () => {
     navigate("/");
   };
@@ -33,6 +37,35 @@ const Navbar = () => {
   const handleProfile = () => {
     navigate("/");
   };
+
+  const handleCart = () => {
+    navigate("/cart");
+  };
+
+  // MAPS
+  const links = [
+    {
+      id: 1,
+      GoLink: "/home",
+      label: "Home",
+      ariaLabel: "Home",
+      title: "Home",
+    },
+    {
+      id: 2,
+      GoLink: "/proware",
+      label: "PROWARE",
+      ariaLabel: "PROWARE",
+      title: "PROWARE",
+    },
+    {
+      id: 3,
+      GoLink: "/contact",
+      label: "CONTACT US",
+      ariaLabel: "CONTACT US",
+      title: "CONTACT US",
+    },
+  ];
 
   return (
     <div className="sticky top-0 z-50 ">
@@ -45,42 +78,35 @@ const Navbar = () => {
           >
             <img src={images.WHITEMODIFORM} width={50} alt="MODIFORM LOGO" />
           </div>
+
           <ul className="items-center hidden space-x-8 lg:flex">
-            <li>
-              <RouterLink
-                to="/home"
-                aria-label="Home"
-                title="Home"
-                className="tracking-wide text-white hover:text-yellow-400 font-bold"
-              >
-                HOME
-              </RouterLink>
-            </li>
-
-            <li>
-              <RouterLink
-                to="/proware"
-                aria-label="PROWARE"
-                title="PROWARE"
-                className="tracking-wide text-white hover:text-yellow-400 font-bold"
-              >
-                PROWARE
-              </RouterLink>
-            </li>
-
-            <li>
-              <RouterLink
-                to="/contact"
-                aria-label="CONTACT US"
-                title="CONTACT US"
-                className="tracking-wide text-white hover:text-yellow-400 font-bold"
-              >
-                CONTACT US
-              </RouterLink>
-            </li>
+            {links.map((NavbarLinks) => (
+              <li key={NavbarLinks.id}>
+                <RouterLink
+                  to={NavbarLinks.GoLink}
+                  aria-label={NavbarLinks.ariaLabel}
+                  title={NavbarLinks.title}
+                  className="tracking-wide text-white hover:text-yellow-400 font-bold"
+                >
+                  {NavbarLinks.label}
+                </RouterLink>
+              </li>
+            ))}
           </ul>
 
           <ul className="items-center hidden lg:flex">
+            <div className="p-2">
+              <Tooltip title="Modiform Cart">
+                <Badge badgeContent={4} color="primary">
+                  <ShoppingCartIcon
+                    onClick={handleCart}
+                    style={{ fontSize: 30 }}
+                    className="text-white"
+                  />
+                </Badge>
+              </Tooltip>
+            </div>
+
             <Notifications />
 
             <React.Fragment>
@@ -101,6 +127,8 @@ const Navbar = () => {
                 className="w-86"
                 anchorEl={anchorEl}
                 id="account-menu"
+                onClose={handleClose}
+                onClick={handleClose}
                 open={open}
                 PaperProps={{
                   elevation: 0,
@@ -203,59 +231,35 @@ const Navbar = () => {
                   </div>
                   <nav>
                     <ul className="space-y-4">
-                      <li>
-                        <RouterLink
-                          to="/home"
-                          aria-label="Home"
-                          title="Home"
-                          className="tracking-wide text-white hover:text-yellow-400 font-bold"
-                        >
-                          HOME
-                        </RouterLink>
+                      {links.map((NavbarLinks) => (
+                        <li key={NavbarLinks.id}>
+                          <RouterLink
+                            to={NavbarLinks.GoLink}
+                            aria-label={NavbarLinks.ariaLabel}
+                            title={NavbarLinks.title}
+                            className="tracking-wide text-white hover:text-yellow-400 font-bold"
+                          >
+                            {NavbarLinks.label}
+                          </RouterLink>
+                        </li>
+                      ))}
+
+                      <li
+                        onClick={handleProfile}
+                        aria-label="PROFILE"
+                        title="PROFILE"
+                        className="tracking-wide text-white hover:text-yellow-400 font-bold"
+                      >
+                        PROFILE
                       </li>
 
-                      <li>
-                        <RouterLink
-                          to="/proware"
-                          aria-label="Home"
-                          title="Home"
-                          className="tracking-wide text-white hover:text-yellow-400 font-bold"
-                        >
-                          PROWARE
-                        </RouterLink>
-                      </li>
-
-                      <li>
-                        <RouterLink
-                          to="/contact"
-                          aria-label="Product pricing"
-                          title="Product pricing"
-                          className="tracking-wide text-white hover:text-yellow-400 font-bold"
-                        >
-                          CONTACT US
-                        </RouterLink>
-                      </li>
-
-                      <li>
-                        <a
-                          href="/"
-                          aria-label="Product pricing"
-                          title="Product pricing"
-                          className="tracking-wide text-white hover:text-yellow-400 font-bold"
-                        >
-                          PROFILE
-                        </a>
-                      </li>
-
-                      <li>
-                        <RouterLink
-                          to="/"
-                          className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white rounded shadow-md bg-gray-500 hover:bg-yellow-700"
-                          aria-label="Sign up"
-                          title="Sign up"
-                        >
-                          LOGOUT
-                        </RouterLink>
+                      <li
+                        onClick={handleLogOut}
+                        className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white rounded shadow-md bg-gray-500 hover:bg-yellow-700"
+                        aria-label="Sign up"
+                        title="Sign up"
+                      >
+                        LOGOUT
                       </li>
                     </ul>
                   </nav>
