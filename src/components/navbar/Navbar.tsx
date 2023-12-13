@@ -29,6 +29,7 @@ const Navbar = () => {
     navigate("/");
   };
 
+  // PROFILE
   const handleProfile = () => {
     navigate("/");
   };
