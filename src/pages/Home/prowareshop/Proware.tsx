@@ -191,7 +191,7 @@ const Proware = () => {
       {/* Modify rendering based on the selected category */}
       {selectedCategory === "COLLEGE" && (
         <>
-          <div className="flex flex-wrap items-center">
+          <div className="flex flex-wrap justify-center items-center">
             <h1 className="text-start px-10 w-full font-bold text-lg sm:text-2xl lg:text-4xl">
               INFORMATION & COMMUNICATION TECHNOLOGY
             </h1>
@@ -214,7 +214,7 @@ const Proware = () => {
             })}
           </div>
 
-          <div className="flex flex-wrap items-center">
+          <div className="flex flex-wrap justify-center items-center">
             <h1 className="text-start px-10 w-full font-bold text-lg sm:text-2xl lg:text-4xl">
               TOURISM
             </h1>
