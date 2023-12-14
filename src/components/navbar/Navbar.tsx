@@ -12,6 +12,7 @@ import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useNavigate } from "react-router-dom";
 import { Link as RouterLink } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const Navbar = () => {
   // FOR RESPONSIVE
@@ -42,31 +43,6 @@ const Navbar = () => {
     navigate("/cart");
   };
 
-  // MAPS
-  const links = [
-    {
-      id: 1,
-      GoLink: "/home",
-      label: "Home",
-      ariaLabel: "Home",
-      title: "Home",
-    },
-    {
-      id: 2,
-      GoLink: "/proware",
-      label: "PROWARE",
-      ariaLabel: "PROWARE",
-      title: "PROWARE",
-    },
-    {
-      id: 3,
-      GoLink: "/contact",
-      label: "CONTACT US",
-      ariaLabel: "CONTACT US",
-      title: "CONTACT US",
-    },
-  ];
-
   return (
     <div className="sticky top-0 z-50 ">
       <div className="bg-[#102A3F] px-4 py-5 mx-auto max-w-full md:px-24 lg:px-8">
@@ -79,31 +55,51 @@ const Navbar = () => {
             <img src={images.WHITEMODIFORM} width={50} alt="MODIFORM LOGO" />
           </div>
 
-          <ul className="items-center hidden space-x-8 lg:flex">
-            {links.map((NavbarLinks) => (
-              <li key={NavbarLinks.id}>
+          <ul className="items-center hidden lg:flex">
+            <div className="flex space-x-8">
+              <li>
                 <RouterLink
-                  to={NavbarLinks.GoLink}
-                  aria-label={NavbarLinks.ariaLabel}
-                  title={NavbarLinks.title}
+                  to="/home"
+                  aria-label="HOME"
+                  title="HOME"
                   className="tracking-wide text-white hover:text-yellow-400 font-bold"
                 >
-                  {NavbarLinks.label}
+                  HOME
                 </RouterLink>
               </li>
-            ))}
-          </ul>
+              <li>
+                <RouterLink
+                  to="/proware"
+                  aria-label="PROWARE"
+                  title="PROWARE"
+                  className="tracking-wide text-white hover:text-yellow-400 font-bold"
+                >
+                  PROWARE SHOP
+                </RouterLink>
+              </li>
+              <li>
+                <RouterLink
+                  to="/contact"
+                  aria-label="CONTACT"
+                  title="CONTACT"
+                  className="tracking-wide text-white hover:text-yellow-400 font-bold"
+                >
+                  CONTACT
+                </RouterLink>
+              </li>
+            </div>
 
-          <ul className="items-center hidden lg:flex">
             <div className="p-2">
               <Tooltip title="Modiform Cart">
-                <Badge badgeContent={4} color="primary">
-                  <ShoppingCartIcon
-                    onClick={handleCart}
-                    style={{ fontSize: 30 }}
-                    className="text-white"
-                  />
-                </Badge>
+                <Button>
+                  <Badge badgeContent={4} color="primary">
+                    <ShoppingCartIcon
+                      onClick={handleCart}
+                      style={{ fontSize: 30 }}
+                      className="text-white"
+                    />
+                  </Badge>
+                </Button>
               </Tooltip>
             </div>
 
@@ -170,6 +166,21 @@ const Navbar = () => {
           </ul>
 
           <div className="lg:hidden flex items-center justify-between">
+            <ul className="px-2 items-center lg:flex">
+              <Tooltip title="Modiform Cart">
+                <Button>
+                  <Badge badgeContent={4} color="primary">
+                    <ShoppingCartIcon
+                      onClick={handleCart}
+                      style={{ fontSize: 30 }}
+                      className="text-white"
+                    />
+                  </Badge>
+                </Button>
+              </Tooltip>
+              <Notifications />
+            </ul>
+
             <button
               aria-label="Open Menu"
               title="Open Menu"
@@ -191,10 +202,6 @@ const Navbar = () => {
                 />
               </svg>
             </button>
-
-            <ul className="px-2 items-center lg:flex">
-              <Notifications />
-            </ul>
 
             {isMenuOpen && (
               <div className="absolute top-0 left-0 w-full">
@@ -231,18 +238,36 @@ const Navbar = () => {
                   </div>
                   <nav>
                     <ul className="space-y-4">
-                      {links.map((NavbarLinks) => (
-                        <li key={NavbarLinks.id}>
-                          <RouterLink
-                            to={NavbarLinks.GoLink}
-                            aria-label={NavbarLinks.ariaLabel}
-                            title={NavbarLinks.title}
-                            className="tracking-wide text-white hover:text-yellow-400 font-bold"
-                          >
-                            {NavbarLinks.label}
-                          </RouterLink>
-                        </li>
-                      ))}
+                      <li>
+                        <RouterLink
+                          to="/home"
+                          aria-label="HOME"
+                          title="HOME"
+                          className="tracking-wide text-white hover:text-yellow-400 font-bold"
+                        >
+                          HOME
+                        </RouterLink>
+                      </li>
+                      <li>
+                        <RouterLink
+                          to="/proware"
+                          aria-label="PROWARE"
+                          title="PROWARE"
+                          className="tracking-wide text-white hover:text-yellow-400 font-bold"
+                        >
+                          PROWARE SHOP
+                        </RouterLink>
+                      </li>
+                      <li>
+                        <RouterLink
+                          to="/contact"
+                          aria-label="CONTACT"
+                          title="CONTACT"
+                          className="tracking-wide text-white hover:text-yellow-400 font-bold"
+                        >
+                          CONTACT
+                        </RouterLink>
+                      </li>
 
                       <li
                         onClick={handleProfile}

@@ -8,8 +8,8 @@ import {
 } from "@material-tailwind/react";
 
 interface ModiDescription {
-  uniPicture: any;
-  uniName: any;
+  uniPicture: string;
+  uniName: string;
 }
 
 const ProwareItem: React.FC<ModiDescription> = ({ uniPicture, uniName }) => {

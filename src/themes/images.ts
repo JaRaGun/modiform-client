@@ -11,8 +11,14 @@ import COLLEGE from "../assets/IMGS/College.png";
 import SENIORHIGH from "../assets/IMGS/SeniorHigh.png";
 import OTHERS from "../assets/IMGS/Others.png";
 import CONTACTS from "../assets/IMGS/CONTACTS.png";
-import BSITUNIFORM from "../assets/IMGS/UNIFROM/BSIT/ITUNIF.jpg";
-import BSITPANTS from "../assets/IMGS/UNIFROM/BSIT/ITPANTS.png";
+import PIC from "../assets/IMGS/CAROUSEL/pic.jpg";
+import PIC2 from "../assets/IMGS/CAROUSEL/pic2.jpg";
+import PIC3 from "../assets/IMGS/CAROUSEL/pic3.jpg";
+import PIC4 from "../assets/IMGS/CAROUSEL/pic4.jpg";
+import PIC5 from "../assets/IMGS/CAROUSEL/pic5.jpg";
+import PIC6 from "../assets/IMGS/CAROUSEL/pic6.jpg";
+import PIC7 from "../assets/IMGS/CAROUSEL/pic7.jpg";
+import PIC8 from "../assets/IMGS/CAROUSEL/pic8.jpg";
 
 export default {
   MODILOGO,
@@ -24,9 +30,15 @@ export default {
   SENIORHIGH,
   OTHERS,
   CONTACTS,
-  BSITUNIFORM,
-  BSITPANTS,
   HOME2,
   HOME3,
   HOME4,
+  PIC,
+  PIC2,
+  PIC3,
+  PIC4,
+  PIC5,
+  PIC6,
+  PIC7,
+  PIC8,
 };
