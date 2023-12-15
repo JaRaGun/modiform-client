@@ -205,6 +205,7 @@ const Proware = () => {
                 return (
                   <ProwareItem
                     key={uniform.id}
+                    id={uniform.id}
                     uniPicture={uniform.uniPicture}
                     uniName={uniform.uniName}
                   />
@@ -228,6 +229,7 @@ const Proware = () => {
                 return (
                   <ProwareItem
                     key={uniform.id}
+                    id={uniform.id}
                     uniPicture={uniform.uniPicture}
                     uniName={uniform.uniName}
                   />
