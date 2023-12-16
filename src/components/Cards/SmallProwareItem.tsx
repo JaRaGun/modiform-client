@@ -13,17 +13,23 @@ interface ModiDescription {
   id: number;
   uniPicture: string;
   uniName: string;
+  uniPrice: number;
+  uniSize: string;
 }
 
-const ProwareItem: React.FC<ModiDescription> = ({
+const SmallProwareItem: React.FC<ModiDescription> = ({
   id,
   uniPicture,
   uniName,
+  uniPrice,
+  uniSize,
 }) => {
   const newItem = {
     id: id,
     urlPicture: uniPicture,
     itemName: uniName,
+    itemPrice: uniPrice,
+    itemSize: uniSize,
   };
   const addToCartFunction = () => {
     try {
@@ -59,13 +65,31 @@ const ProwareItem: React.FC<ModiDescription> = ({
             />
           </CardHeader>
           <CardBody placeholder={undefined}>
-            <div className="mb-2 text-center">
+            <div className="mb-2 flex justify-between text-center">
               <Typography
                 color="blue-gray"
                 className="font-extrabold"
                 placeholder={undefined}
               >
                 {uniName}
+              </Typography>
+
+              <Typography
+                color="blue-gray"
+                className="font-extrabold"
+                placeholder={undefined}
+              >
+                {uniPrice}
+              </Typography>
+            </div>
+
+            <div>
+              <Typography
+                color="blue-gray"
+                className="font-bold"
+                placeholder={undefined}
+              >
+                {uniSize}
               </Typography>
             </div>
           </CardBody>
@@ -86,4 +110,4 @@ const ProwareItem: React.FC<ModiDescription> = ({
   );
 };
 
-export default ProwareItem;
+export default SmallProwareItem;
