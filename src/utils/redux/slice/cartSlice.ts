@@ -4,9 +4,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface CartItem {
   id: string;
-  name: string;
-  price: number;
-  // Define other properties of a cart item
+  urlPicture: string;
+  itemName: string;
+  itemPrice: number;
+  itemSize: string;
+  itemCategory: string;
 }
 
 interface CartState {
@@ -21,18 +23,19 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<CartItem>) => {
+    addToCartRedux: (state, action: PayloadAction<CartItem>) => {
       state.items.push(action.payload);
     },
-    removeFromCart: (state, action: PayloadAction<string>) => {
+    removeFromCartRedux: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
     },
-    clearCart: (state) => {
+    clearCartRedux: (state) => {
       state.items = [];
     },
   },
 });
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const { addToCartRedux, removeFromCartRedux, clearCartRedux } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

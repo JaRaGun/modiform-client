@@ -1,31 +1,19 @@
-import { useState, useEffect } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Navbar from "../../../components/navbar/Navbar";
-import { getCartItems, updateCartItems } from "./utils";
 
+import { useAppSelector, useAppDispatch } from "../../../utils/redux/hooks";
+import { removeFromCartRedux } from "../../../utils/redux/slice/cartSlice";
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([]);
-
-  useEffect(() => {
-    // Retrieve cart items from local storage when the component mounts
-    const storedCartItems = getCartItems();
-    setCartItems(storedCartItems);
-  }, []);
-
-  const handleDelete = (indexToRemove: number) => {
-    const updatedCartItems = cartItems.filter(
-      (_, index) => index !== indexToRemove
-    );
-    setCartItems(updatedCartItems);
-    updateCartItems(updatedCartItems); // Update local storage after deletion
-  };
+  const dispatch = useAppDispatch();
+  const cartItems = useAppSelector((state) => state.cart.items);
 
   return (
     <div>
       <Navbar />
 
-      <div className="px-10 mx-auto py-10">
+      <div className="px-10 py-10 mx-auto">
         {cartItems.map((item: any, index: any) => (
-          <div key={index} className="shadow-md px-4 mb-5 py-5 md:px-6">
+          <div key={index} className="px-4 py-5 mb-5 shadow-md md:px-6">
             <div className="flex flex-wrap -mx-4">
               <div className="w-full px-4 md:w-1/2 ">
                 <div className="relative h-[450px] shadow-md">
@@ -45,7 +33,7 @@ const Cart = () => {
                     {item.itemName}
                   </h2>
 
-                  <p className="text-2xl font-semibold text-gray-700 mb-5">
+                  <p className="mb-5 text-2xl font-semibold text-gray-700">
                     Size: {""}
                     <span>{item.itemSize}</span>
                   </p>
@@ -66,10 +54,10 @@ const Cart = () => {
                             <span className="m-auto text-2xl font-thin">-</span>
                           </button>
                           <input
-                            className="flex items-center w-full font-semibold text-center text-gray-700 placeholder-gray-700 bg-gray-100 outline-none  focus:outline-none text-md hover:text-black"
+                            className="flex items-center w-full font-semibold text-center text-gray-700 placeholder-gray-700 bg-gray-100 outline-none focus:outline-none text-md hover:text-black"
                             placeholder="1"
                           />
-                          <button className="w-20 h-full text-gray-600 bg-gray-100 border-l rounded-r outline-none cursor-pointer   hover:text-gray-700 hover:bg-gray-300">
+                          <button className="w-20 h-full text-gray-600 bg-gray-100 border-l rounded-r outline-none cursor-pointer hover:text-gray-700 hover:bg-gray-300">
                             <span className="m-auto text-2xl font-thin">+</span>
                           </button>
                         </div>
@@ -86,7 +74,7 @@ const Cart = () => {
 
                   <div className="mb-4 lg:mb-0">
                     <button
-                      onClick={() => handleDelete(index)}
+                      onClick={() => dispatch(removeFromCartRedux(item.id))}
                       className="flex items-center justify-center w-full h-10 p-2 text-gray-500 border border-gray-300 lg:w-11 hover:text-white hover:bg-red-500 hover:border-red-500"
                     >
                       <svg
@@ -112,8 +100,8 @@ const Cart = () => {
         ))}
 
         <div className="w-full py-5">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-6">Summary</h2>
+          <div className="p-6 bg-white rounded-lg shadow-md">
+            <h2 className="mb-6 text-xl font-semibold">Summary</h2>
             <div className="flex justify-between mb-3">
               <span>Subtotal</span>
               <span>$19.99</span>
@@ -131,7 +119,7 @@ const Cart = () => {
               <span className="font-semibold">Total</span>
               <span className="font-semibold">$21.98</span>
             </div>
-            <button className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-6 w-full">
+            <button className="w-full px-4 py-2 mt-6 text-white bg-blue-500 rounded-lg">
               Checkout
             </button>
           </div>
