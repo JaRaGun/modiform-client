@@ -1,15 +1,15 @@
-// import React, { useState } from "react";
-// import {
-//   Card,
-//   CardHeader,
-//   CardBody,
-//   CardFooter,
-//   Typography,
-//   Button,
-// } from "@material-tailwind/react";
-// import { getCartItems } from "../../pages/Home/cart/utils";
-// import Swal from "sweetalert2";
-// import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Typography,
+  Button,
+} from "@material-tailwind/react";
+import { getCartItems } from "../../pages/Home/cart/utils";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 interface ModiDescription {
   id: string;
@@ -22,7 +22,7 @@ interface ModiDescription {
 }
 
 const ProwareCart: React.FC<ModiDescription> = ({
-  // id,
+  id,
   uniPicture,
   uniName,
   uniPrice,
@@ -30,18 +30,18 @@ const ProwareCart: React.FC<ModiDescription> = ({
   uniStocks,
   uniCategory,
 }) => {
-  // const newItem = {
-  //   id: id,
-  //   urlPicture: uniPicture,
-  //   itemName: uniName,
-  //   itemPrice: uniPrice,
-  //   itemSize: uniSize,
-  // };
+  const newItem = {
+    id: id,
+    urlPicture: uniPicture,
+    itemName: uniName,
+    itemPrice: uniPrice,
+    itemSize: uniSize,
+  };
 
-  // const navigate = useNavigate();
-  // const handleCart = () => {
-  //   navigate("/cart");
-  // };
+  const navigate = useNavigate();
+  const handleCart = () => {
+    navigate("/cart");
+  };
 
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-lg max-w-sm max-h-[1000px] hover:shadow-xl">
