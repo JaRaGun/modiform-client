@@ -66,7 +66,6 @@ const Cart = () => {
                             <span className="m-auto text-2xl font-thin">-</span>
                           </button>
                           <input
-                            type="number"
                             className="flex items-center w-full font-semibold text-center text-gray-700 placeholder-gray-700 bg-gray-100 outline-none  focus:outline-none text-md hover:text-black"
                             placeholder="1"
                           />

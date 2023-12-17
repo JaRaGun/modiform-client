@@ -5,21 +5,27 @@ import { Select, Option } from "@material-tailwind/react";
 import { useLocation } from "react-router-dom";
 import ProwareCarousel from "../../../components/Carousels/ProwareCarousel";
 import { GenderButtons } from "./genderbuttons/GenderButtons";
-import {
-  bsitSmallItems,
-  bsitMediumItems,
-  tourismSmallItems,
-  tourismMediumlItems,
-} from "./ProwareSize";
+import { GetCollectionDataFirebase } from "../../../firebase/hooks";
 
 const Proware: React.FC = () => {
   const location = useLocation();
 
   const [selectedCategory, setSelectedCategory] = useState(""); //State to track the selected year
-  const YearCategory = ["COLLEGE", "HIGH SCHOOL", "OTHERS"]; // Selection for College, High School, Others
+  const YearCategory = ["college", "high school", "others"]; // Selection for College, High School, Others
 
   const [selectedSize, setSelectedSize] = useState("");
-  const SizeCategory = ["SMALL", "MEDIUM", "LARGE"]; // Selection for College, High School, Others
+  const SizeCategory = [
+    "S",
+    "M",
+    "L",
+    "XL",
+    "2XL",
+    "3XL",
+    "4XL",
+    "5XL",
+    "6XL",
+    "7XL",
+  ]; // Selection for College, High School, Others
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -50,6 +56,16 @@ const Proware: React.FC = () => {
     setSelectedGender(gender);
   };
 
+  const COLLECTIONNAME = "uniforms";
+
+  const UniformData = GetCollectionDataFirebase(
+    COLLECTIONNAME,
+    selectedGender,
+    selectedSize,
+    selectedCategory
+  );
+
+  // console.log(UniformData);
   return (
     <div>
       <Navbar />
@@ -89,154 +105,21 @@ const Proware: React.FC = () => {
         </div>
       </div>
 
-      {/* Modify rendering based on the selected category */}
-      {selectedSize === "SMALL" && (
-        <>
-          {selectedCategory === "COLLEGE" && (
-            <>
-              <div className="flex flex-wrap justify-center items-center">
-                <h1 className="px-10 w-full font-bold text-lg sm:text-2xl lg:text-4xl">
-                  INFORMATION & COMMUNICATION TECHNOLOGY
-                </h1>
-                {bsitSmallItems.map((uniform) => {
-                  // Check if uniGender exists or matches selectedGender
-                  if (
-                    !uniform.uniGender ||
-                    selectedGender === "" ||
-                    uniform.uniGender === selectedGender
-                  ) {
-                    return (
-                      <ProwareCart
-                        key={uniform.id}
-                        id={uniform.id}
-                        uniPicture={uniform.uniPicture}
-                        uniName={uniform.uniName}
-                        uniPrice={uniform.uniPrice}
-                        uniSize={uniform.uniSize}
-                      />
-                    );
-                  }
-                  return null;
-                })}
-              </div>
-
-              <div className="flex flex-wrap justify-center items-center">
-                <h1 className="text-start px-10 w-full font-bold text-lg sm:text-2xl lg:text-4xl">
-                  TOURISM
-                </h1>
-                {tourismSmallItems.map((uniform) => {
-                  // Check if uniGender exists or matches selectedGender
-                  if (
-                    !uniform.uniGender ||
-                    selectedGender === "" ||
-                    uniform.uniGender === selectedGender
-                  ) {
-                    return (
-                      <ProwareCart
-                        key={uniform.id}
-                        id={uniform.id}
-                        uniPicture={uniform.uniPicture}
-                        uniName={uniform.uniName}
-                        uniPrice={uniform.uniPrice}
-                        uniSize={uniform.uniSize}
-                      />
-                    );
-                  }
-                  return null;
-                })}
-              </div>
-            </>
-          )}
-
-          {selectedCategory === "HIGH SCHOOL" && (
-            <>
-              {/* High School related rendering */}
-              {/* Make it blank as per your request */}
-            </>
-          )}
-
-          {selectedCategory === "OTHER" && (
-            <>
-              {/* Other related rendering */}
-              {/* Make it blank as per your request */}
-            </>
-          )}
-        </>
-      )}
-
-      {selectedSize === "MEDIUM" && (
-        <>
-          {selectedCategory === "COLLEGE" && (
-            <>
-              <div className="flex flex-wrap justify-center items-center">
-                <h1 className="px-10 w-full font-bold text-lg sm:text-2xl lg:text-4xl">
-                  INFORMATION & COMMUNICATION TECHNOLOGY
-                </h1>
-                {bsitMediumItems.map((uniform) => {
-                  // Check if uniGender exists or matches selectedGender
-                  if (
-                    !uniform.uniGender ||
-                    selectedGender === "" ||
-                    uniform.uniGender === selectedGender
-                  ) {
-                    return (
-                      <ProwareCart
-                        key={uniform.id}
-                        id={uniform.id}
-                        uniPicture={uniform.uniPicture}
-                        uniName={uniform.uniName}
-                        uniPrice={uniform.uniPrice}
-                        uniSize={uniform.uniSize}
-                      />
-                    );
-                  }
-                  return null;
-                })}
-              </div>
-
-              <div className="flex flex-wrap justify-center items-center">
-                <h1 className="text-start px-10 w-full font-bold text-lg sm:text-2xl lg:text-4xl">
-                  TOURISM
-                </h1>
-                {tourismMediumlItems.map((uniform) => {
-                  // Check if uniGender exists or matches selectedGender
-                  if (
-                    !uniform.uniGender ||
-                    selectedGender === "" ||
-                    uniform.uniGender === selectedGender
-                  ) {
-                    return (
-                      <ProwareCart
-                        key={uniform.id}
-                        id={uniform.id}
-                        uniPicture={uniform.uniPicture}
-                        uniName={uniform.uniName}
-                        uniPrice={uniform.uniPrice}
-                        uniSize={uniform.uniSize}
-                      />
-                    );
-                  }
-                  return null;
-                })}
-              </div>
-            </>
-          )}
-
-          {selectedCategory === "HIGH SCHOOL" && (
-            <>
-              {/* High School related rendering */}
-              {/* Make it blank as per your request */}
-            </>
-          )}
-
-          {selectedCategory === "OTHER" && (
-            <>
-              {/* Other related rendering */}
-              {/* Make it blank as per your request */}
-            </>
-          )}
-        </>
-      )}
+      <div className="flex flex-wrap items-center justify-center">
+        {UniformData.map((item: any) => (
+          <div className="px-5 py-8" key={item.id}>
+            <ProwareCart
+              id={item.id}
+              uniCategory={item.category}
+              uniStocks={item.stocks}
+              uniPicture={item.image}
+              uniName={item.description}
+              uniPrice={item.price}
+              uniSize={item.size}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,13 +1,73 @@
-import { Button, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import images from "../../themes/images";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+import { Spinner, Button } from "@material-tailwind/react";
+import { checkUserData } from "../../firebase/services";
+import { useAppDispatch } from "../../utils/redux/hooks";
+import { UserInfoRedux } from "../../utils/redux/slice/userSlice";
+import Swal from "sweetalert2";
 
 const Login = () => {
-
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleSignIn = () => {
-    navigate("/home");
+  const [studentId, setUserStudentId] = useState<number | null>(null); // Change initial state to null
+  const [password, setPassword] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const handleuserStudentIdChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const enteredValue = event.target.value;
+    const parsedValue = enteredValue ? parseInt(enteredValue, 10) : null; // Parse to number or set to null if empty
+    setUserStudentId(parsedValue);
+  };
+
+  const handlepasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+  };
+
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      setIsLoading(true);
+      const checkUserCredentials = await checkUserData(studentId, password);
+      // console.log("checkuser", checkUserCredentials)
+
+      if (!checkUserCredentials.empty) {
+        const userData = checkUserCredentials.docs[0].data();
+
+        dispatch(
+          UserInfoRedux({
+            studentIdRedux: userData.studentId,
+            passwordRedux: userData.password,
+            firstNameRedux: userData.firstName,
+            lastNameRedux: userData.lastName,
+          })
+        );
+        localStorage.setItem("userData", JSON.stringify(userData));
+        setIsLoading(false);
+        navigate("/home");
+        // console.log(userData);
+      } else {
+        setIsLoading(false);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Invalid username or password",
+        });
+      }
+    } catch (error) {
+      setIsLoading(false);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong! Please try again later",
+      });
+    }
   };
 
   return (
@@ -50,10 +110,12 @@ const Login = () => {
               </div>
 
               <div className="mt-8">
-                <form>
+                <form onSubmit={handleLogin}>
                   <div className="space-y-4">
                     {/* required */}
                     <TextField
+                      value={studentId}
+                      onChange={handleuserStudentIdChange}
                       fullWidth
                       type="text"
                       label="Student ID Number"
@@ -62,6 +124,8 @@ const Login = () => {
                     />
 
                     <TextField
+                      value={password}
+                      onChange={handlepasswordChange}
                       fullWidth
                       type="password"
                       label="Password"
@@ -69,11 +133,20 @@ const Login = () => {
                       placeholder="Password"
                     />
 
-                    {/*  type="submit" */}
-                    <Button onClick={handleSignIn} fullWidth variant="contained">
-                      Sign In
-                    </Button>
-
+                    {isLoading ? (
+                      <div className="flex justify-center items-center">
+                        <Spinner color="blue" className="w-10 h-10" />
+                      </div>
+                    ) : (
+                      <Button
+                        type="submit"
+                        fullWidth
+                        color="blue"
+                        placeholder={undefined}
+                      >
+                        Sign in
+                      </Button>
+                    )}
                   </div>
                 </form>
               </div>

@@ -9,7 +9,7 @@ export const GenderButtons: React.FC<GenderButtonsProps> = ({
   onGenderSelect,
   selectedGender,
 }: GenderButtonsProps) => {
-  const GenderButton = ["MENS", "WOMENS"]; // Buttons if Mens or Womens
+  const GenderButton = ["Male", "Female", "All"]; // Buttons if Mens or Womens
 
   const handleGenderClick = (gender: string) => {
     onGenderSelect(gender); // Trigger the provided callback with the selected gender

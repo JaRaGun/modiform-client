@@ -13,6 +13,8 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useNavigate } from "react-router-dom";
 import { Link as RouterLink } from "react-router-dom";
 import { Button } from "@mui/material";
+import { useAppDispatch } from "../../utils/redux/hooks";
+import { logoutUserRedux } from "../../utils/redux/slice/userSlice";
 
 const Navbar = () => {
   // FOR RESPONSIVE
@@ -30,7 +32,10 @@ const Navbar = () => {
 
   // HANDLE NAVIGATE (LOGOUT)
   const navigate = useNavigate();
-  const handleLogOut = () => {
+  const dispatch = useAppDispatch();
+  const handleLogOut = async () => {
+    await dispatch(logoutUserRedux());
+    await localStorage.clear();
     navigate("/");
   };
 
