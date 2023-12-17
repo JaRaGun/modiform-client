@@ -43,6 +43,9 @@ const Navbar = () => {
     navigate("/cart");
   };
 
+  const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+  const cartItemsCount = cartItems.length;
+
   return (
     <div className="sticky top-0 z-50 ">
       <div className="bg-[#102A3F] px-4 py-5 mx-auto max-w-full md:px-24 lg:px-8">
@@ -89,10 +92,16 @@ const Navbar = () => {
               </li>
             </div>
 
+            {/* CART */}
             <div className="p-2">
               <Tooltip title="Modiform Cart">
                 <Button>
-                  <Badge badgeContent={4} color="primary">
+                  <Badge
+                    color="primary"
+                    badgeContent={cartItemsCount}
+                    showZero
+                    // variant="dot"
+                  >
                     <ShoppingCartIcon
                       onClick={handleCart}
                       style={{ fontSize: 30 }}
@@ -169,7 +178,12 @@ const Navbar = () => {
             <ul className="px-2 items-center lg:flex">
               <Tooltip title="Modiform Cart">
                 <Button>
-                  <Badge badgeContent={4} color="primary">
+                  <Badge
+                    color="primary"
+                    badgeContent={cartItemsCount}
+                    showZero
+                    // variant="dot"
+                  >
                     <ShoppingCartIcon
                       onClick={handleCart}
                       style={{ fontSize: 30 }}

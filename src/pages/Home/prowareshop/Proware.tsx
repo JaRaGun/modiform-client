@@ -1,110 +1,16 @@
 import { useState, useEffect } from "react";
 import Navbar from "../../../components/navbar/Navbar";
-import SmallProwareItem from "../../../components/Cards/SmallProwareItem";
+import ProwareCart from "../../../components/Cards/ProwareCart";
 import { Select, Option } from "@material-tailwind/react";
 import { useLocation } from "react-router-dom";
 import ProwareCarousel from "../../../components/Carousels/ProwareCarousel";
 import { GenderButtons } from "./genderbuttons/GenderButtons";
-
-interface Product {
-  id: number;
-  uniPicture: string;
-  uniName: string;
-  uniGender?: string; // Make uniGender optional
-  uniPrice: number;
-  uniSize: string;
-}
-
-// IT
-const bsitSmallItems: Product[] = [
-  {
-    id: 1,
-    uniPicture:
-      "https://firebasestorage.googleapis.com/v0/b/modiform-35693.appspot.com/o/front_end_pictures%2FBSIT%2FITUNIF.jpg?alt=media&token=147b9262-7618-45e9-8933-426653120a17",
-    uniName: "IT POLO",
-    uniGender: "MENS", // Provide uniGender for items
-    uniPrice: 100.0,
-    uniSize: "SMALL",
-  },
-
-  {
-    id: 2,
-    uniPicture:
-      "https://firebasestorage.googleapis.com/v0/b/modiform-35693.appspot.com/o/front_end_pictures%2FBSIT%2FITPANTS.png?alt=media&token=98109abd-7b81-461d-afd2-d26576242c78",
-    uniName: "IT PANTS",
-    uniGender: "MENS",
-    uniPrice: 120.0,
-    uniSize: "SMALL",
-  },
-  // Add other products with or without uniGender
-];
-
-// IT
-const bsitMediumItems: Product[] = [
-  {
-    id: 1,
-    uniPicture:
-      "https://firebasestorage.googleapis.com/v0/b/modiform-35693.appspot.com/o/front_end_pictures%2FBSIT%2FITUNIF.jpg?alt=media&token=147b9262-7618-45e9-8933-426653120a17",
-    uniName: "IT POLO",
-    uniGender: "MENS", // Provide uniGender for items
-    uniPrice: 100.0,
-    uniSize: "MEDIUM",
-  },
-
-  {
-    id: 2,
-    uniPicture:
-      "https://firebasestorage.googleapis.com/v0/b/modiform-35693.appspot.com/o/front_end_pictures%2FBSIT%2FITPANTS.png?alt=media&token=98109abd-7b81-461d-afd2-d26576242c78",
-    uniName: "IT PANTS",
-    uniGender: "MENS",
-    uniPrice: 120.0,
-    uniSize: "MEDIUM",
-  },
-  // Add other products with or without uniGender
-];
-
-// TOURISM
-const tourismProducts: Product[] = [
-  {
-    id: 1,
-    uniPicture:
-      "https://firebasestorage.googleapis.com/v0/b/modiform-35693.appspot.com/o/front_end_pictures%2FTOURISM%2FTourPolo.JPG?alt=media&token=983018ae-39a1-418c-ada2-d950e73f0a0f",
-    uniName: "TM POLO",
-    uniGender: "MENS", // Provide uniGender for items
-    uniPrice: 90.0,
-    uniSize: "SMALL",
-  },
-
-  {
-    id: 2,
-    uniPicture:
-      "https://firebasestorage.googleapis.com/v0/b/modiform-35693.appspot.com/o/front_end_pictures%2FTOURISM%2FTourPants.JPG?alt=media&token=709c822d-b5db-429b-9080-d576f83313e2",
-    uniName: "TM PANTS",
-    uniGender: "MENS",
-    uniPrice: 200.0,
-    uniSize: "SMALL",
-  },
-
-  {
-    id: 3,
-    uniPicture:
-      "https://firebasestorage.googleapis.com/v0/b/modiform-35693.appspot.com/o/front_end_pictures%2FTOURISM%2FNecktie.JPG?alt=media&token=0123a1d6-d70b-4905-851e-204f46d55c40",
-    uniName: "NECKTIE",
-    uniGender: "MENS",
-    uniPrice: 50.0,
-    uniSize: "SMALL",
-  },
-
-  {
-    id: 4,
-    uniPicture:
-      "https://firebasestorage.googleapis.com/v0/b/modiform-35693.appspot.com/o/front_end_pictures%2FTOURISM%2FTourFormal.JPG?alt=media&token=9ed72e53-20eb-4974-a87b-9bd08de734c6",
-    uniName: "TM MALE BLAZER",
-    uniGender: "MENS",
-    uniPrice: 1000.0,
-    uniSize: "SMALL",
-  },
-];
+import {
+  bsitSmallItems,
+  bsitMediumItems,
+  tourismSmallItems,
+  tourismMediumlItems,
+} from "./ProwareSize";
 
 const Proware: React.FC = () => {
   const location = useLocation();
@@ -200,7 +106,7 @@ const Proware: React.FC = () => {
                     uniform.uniGender === selectedGender
                   ) {
                     return (
-                      <SmallProwareItem
+                      <ProwareCart
                         key={uniform.id}
                         id={uniform.id}
                         uniPicture={uniform.uniPicture}
@@ -218,7 +124,7 @@ const Proware: React.FC = () => {
                 <h1 className="text-start px-10 w-full font-bold text-lg sm:text-2xl lg:text-4xl">
                   TOURISM
                 </h1>
-                {tourismProducts.map((uniform) => {
+                {tourismSmallItems.map((uniform) => {
                   // Check if uniGender exists or matches selectedGender
                   if (
                     !uniform.uniGender ||
@@ -226,7 +132,7 @@ const Proware: React.FC = () => {
                     uniform.uniGender === selectedGender
                   ) {
                     return (
-                      <SmallProwareItem
+                      <ProwareCart
                         key={uniform.id}
                         id={uniform.id}
                         uniPicture={uniform.uniPicture}
@@ -274,7 +180,7 @@ const Proware: React.FC = () => {
                     uniform.uniGender === selectedGender
                   ) {
                     return (
-                      <SmallProwareItem
+                      <ProwareCart
                         key={uniform.id}
                         id={uniform.id}
                         uniPicture={uniform.uniPicture}
@@ -292,7 +198,7 @@ const Proware: React.FC = () => {
                 <h1 className="text-start px-10 w-full font-bold text-lg sm:text-2xl lg:text-4xl">
                   TOURISM
                 </h1>
-                {tourismProducts.map((uniform) => {
+                {tourismMediumlItems.map((uniform) => {
                   // Check if uniGender exists or matches selectedGender
                   if (
                     !uniform.uniGender ||
@@ -300,7 +206,7 @@ const Proware: React.FC = () => {
                     uniform.uniGender === selectedGender
                   ) {
                     return (
-                      <SmallProwareItem
+                      <ProwareCart
                         key={uniform.id}
                         id={uniform.id}
                         uniPicture={uniform.uniPicture}

@@ -1,5 +1,5 @@
 import Navbar from "./navbar/Navbar";
 import Notifications from "./navbar/Notifications/Notifications";
-import SmallProwareItem from "./Cards/SmallProwareItem";
+import ProwareCart from "./Cards/ProwareCart";
 
-export default { Navbar, Notifications, SmallProwareItem };
+export default { Navbar, Notifications, ProwareCart };
