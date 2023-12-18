@@ -10,7 +10,7 @@ const CheckOutButton = () => {
   );
 
   return (
-    <div className="w-full py-5">
+    <div className="w-full py-5p px-5">
       <div className="p-6 bg-white rounded-lg shadow-md">
         <h2 className="mb-6 text-xl font-semibold">ORDER SUMMARY</h2>
 

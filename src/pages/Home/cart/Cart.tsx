@@ -46,7 +46,10 @@ const Cart = () => {
         <div className="w-full md:w-2/3">
           {cartItems.length > 0 ? (
             cartItems.map((item: any, index: any) => (
-              <div key={index} className="px-4 py-5 mb-5 shadow-md md:px-6">
+              <div
+                key={index}
+                className="px-4 py-5 mb-5 shadow-md md:px-6 md:ml-5"
+              >
                 <div className="flex flex-wrap -mx-4">
                   <div className="w-full px-4 md:w-1/2 ">
                     <div className="relative h-[450px] shadow-md">
