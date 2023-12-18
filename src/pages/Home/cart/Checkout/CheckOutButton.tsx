@@ -8,15 +8,15 @@ const CheckOutButton = () => {
     (total, item) => total + item.totalPrice,
     0
   );
-
+  // console.log(cartItems);
   return (
-    <div className="w-full py-5p px-5">
+    <div className="w-full px-5 py-5p">
       <div className="p-6 bg-white rounded-lg shadow-md">
         <h2 className="mb-6 text-xl font-semibold">ORDER SUMMARY</h2>
 
         {cartItems.map((item) => (
           <div key={item.id} className="space-y-4 text-lg">
-            <h3 className="my-4">{item.itemName.toLocaleUpperCase()}</h3>
+            <h3 className="my-4">{item.itemName}</h3>
             <p>QTY: {item.quantity}</p>
             <p>SIZE: {item.itemSize}</p>
             <hr className="my-4 border-black" />

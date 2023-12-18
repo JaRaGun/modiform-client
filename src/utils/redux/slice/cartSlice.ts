@@ -1,8 +1,7 @@
 // cartSlice.ts
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface CartItem {
+interface CartItemInterface {
   id: string;
   itemCode: string;
   urlPicture: string;
@@ -15,7 +14,7 @@ interface CartItem {
 }
 
 interface CartState {
-  items: CartItem[];
+  items: CartItemInterface[];
 }
 
 const initialState: CartState = {
@@ -26,7 +25,7 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCartRedux: (state, action: PayloadAction<CartItem>) => {
+    addToCartRedux: (state, action: PayloadAction<CartItemInterface>) => {
       const itemIndex = state.items.findIndex(
         (item) => item.id === action.payload.id
       );

@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { useAppDispatch, useAppSelector } from "../../utils/redux/hooks";
 import { addToCartRedux } from "../../utils/redux/slice/cartSlice";
 import { addToCartFirebase } from "../../firebase/services";
-interface ModiDescription {
+export interface ModiDescription {
   id: string;
   uniCode: string;
   uniPicture: string;

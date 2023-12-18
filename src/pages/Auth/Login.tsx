@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TextField } from "@mui/material";
 import images from "../../themes/images";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +8,8 @@ import { Spinner, Button } from "@material-tailwind/react";
 import { checkUserData } from "../../firebase/services";
 import { useAppDispatch } from "../../utils/redux/hooks";
 import { UserInfoRedux } from "../../utils/redux/slice/userSlice";
-import addToCartRedux from "../../utils/redux/slice/cartSlice";
+import { addToCartRedux } from "../../utils/redux/slice/cartSlice";
+
 import Swal from "sweetalert2";
 
 const Login = () => {
@@ -36,20 +38,12 @@ const Login = () => {
     // console.log(itemsCartFromFirebase);
     try {
       setIsLoading(true);
-      const checkUserCart = await GetItemCartFirebase(studentId);
+      const checkUserCart: any = await GetItemCartFirebase(studentId);
 
       // console.log(checkUserCart);
-      const itemsCartFromFirebase = checkUserCart.map((item) => ({
-        id: item.id,
-        itemCode: item.itemCode,
-        urlPicture: item.urlPicture,
-        itemName: item.itemName,
-        itemPrice: item.itemPrice,
-        itemSize: item.itemSize,
-        itemCategory: item.itemCategory,
-        quantity: item.quantity,
-        totalPrice: item.totalPrice,
-      }));
+
+      // console.log(checkUserCart);
+
       const checkUserCredentials = await checkUserData(studentId, password);
       // console.log("checkuser", checkUserCredentials)
 
@@ -66,7 +60,25 @@ const Login = () => {
         );
 
         // Dispatch the addToCartRedux action with itemsCartFromFirebase
-        // dispatch(addToCartRedux(itemsCartFromFirebase));
+        if (checkUserCart) {
+          checkUserCart.forEach((item: any) => {
+            dispatch(
+              addToCartRedux({
+                ...item,
+                id: item.id,
+                itemCode: item.itemCode,
+                urlPicture: item.urlPicture,
+                itemName: item.itemName,
+                itemPrice: item.itemPrice,
+                itemSize: item.itemSize,
+                itemCategory: item.itemCategory,
+                quantity: item.quantity,
+                totalPrice: item.totalPrice,
+              })
+            );
+          });
+        }
+
         localStorage.setItem("userData", JSON.stringify(userData));
 
         setIsLoading(false);
