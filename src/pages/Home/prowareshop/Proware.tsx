@@ -25,6 +25,7 @@ const Proware: React.FC = () => {
     "5XL",
     "6XL",
     "7XL",
+    "None",
   ]; // Selection for College, High School, Others
 
   useEffect(() => {
