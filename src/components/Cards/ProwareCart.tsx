@@ -1,8 +1,9 @@
 import React from "react";
 import Swal from "sweetalert2";
 // import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../utils/redux/hooks";
+import { useAppDispatch , useAppSelector} from "../../utils/redux/hooks";
 import { addToCartRedux } from "../../utils/redux/slice/cartSlice";
+import { addToCartFirebase } from "../../firebase/services";
 interface ModiDescription {
   id: string;
   uniCode: string;
@@ -12,6 +13,12 @@ interface ModiDescription {
   uniSize: string;
   uniStocks: number;
   uniCategory: string;
+}
+const isStocksZero = (uniStocks: number) => {
+  if (uniStocks === 0) {
+    return true;
+  }
+  return false;
 }
 
 const ProwareCart: React.FC<ModiDescription> = ({
@@ -38,10 +45,11 @@ const ProwareCart: React.FC<ModiDescription> = ({
   };
 
   // const navigate = useNavigate();
-  const handleCart = () => {
+  const {studentIdRedux} = useAppSelector((state) => state.user);
+  const handleCart = async () => {
     // Dispatch addToCart action with the new item
-    dispatch(addToCartRedux(newItem));
-
+    await dispatch(addToCartRedux(newItem));
+    await addToCartFirebase(studentIdRedux, newItem);
     // You can also show a notification or perform other actions if needed
     Swal.fire("Item added to cart!", "", "success");
 
@@ -71,12 +79,19 @@ const ProwareCart: React.FC<ModiDescription> = ({
         </p>
         <div className="flex items-center justify-between">
           <span className="text-lg font-bold">₱ {uniPrice}</span>
-          <button
-            onClick={handleCart}
-            className="px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-600"
-          >
-            ADD TO CART
-          </button>
+          {
+            isStocksZero(uniStocks) 
+              ? <button
+                  disabled
+                  className={`px-4 py-2 font-bold text-white bg-gray-500 cursor-not-allowed rounded-md`}>
+                  ADD TO CART
+                </button>
+              : <button
+                  onClick={handleCart}
+                  className={`px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-600`}>
+                  ADD TO CART
+                </button>
+          }
         </div>
       </div>
     </div>

@@ -2,11 +2,12 @@ import { TextField } from "@mui/material";
 import images from "../../themes/images";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-
+import { GetItemCartFirebase } from "../../firebase/hooks";
 import { Spinner, Button } from "@material-tailwind/react";
 import { checkUserData } from "../../firebase/services";
 import { useAppDispatch } from "../../utils/redux/hooks";
 import { UserInfoRedux } from "../../utils/redux/slice/userSlice";
+import addToCartRedux from "../../utils/redux/slice/cartSlice";
 import Swal from "sweetalert2";
 
 const Login = () => {
@@ -16,7 +17,7 @@ const Login = () => {
   const [studentId, setUserStudentId] = useState<number | null>(null); // Change initial state to null
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  const checkUserCart = GetItemCartFirebase(studentId);
   const handleuserStudentIdChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -30,9 +31,13 @@ const Login = () => {
   };
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+    
     event.preventDefault();
 
+// console.log(checkUserCart);
+
     try {
+      
       setIsLoading(true);
       const checkUserCredentials = await checkUserData(studentId, password);
       // console.log("checkuser", checkUserCredentials)
@@ -49,6 +54,7 @@ const Login = () => {
           })
         );
         localStorage.setItem("userData", JSON.stringify(userData));
+        
         setIsLoading(false);
         navigate("/home");
         // console.log(userData);

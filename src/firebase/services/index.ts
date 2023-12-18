@@ -4,7 +4,7 @@ import {
   getDocs,
   query,
   where,
-  //   addDoc,
+  addDoc,
   //   doc,
   //   setDoc,
   //   updateDoc,
@@ -24,10 +24,29 @@ export const checkUserData = async (studentId: number|null, password: string) =>
         where("password", "==", password)
       )
     );
-    console.log("QuerySnapshot", querySnapshot);
+    return querySnapshot;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const addToCartFirebase = async (studentId: number | null, cart: any) => {
+  try {
+    const userRef = collection(db, "users");
+    const querySnapshot = await getDocs(
+      query(userRef, where("studentId", "==", studentId))
+    );
+
+    if (!querySnapshot.empty) {
+      const userDoc = querySnapshot.docs[0];
+      const cartRef = collection(db, 'users', userDoc.id, 'cart');
+      await addDoc(cartRef, cart);
+    }
     return querySnapshot;
   } catch (error) {
     console.error("Error fetching data:", error);
     throw error;
   }
-};
+}
+
+
