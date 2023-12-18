@@ -1,18 +1,11 @@
-import React, { useState } from "react";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Typography,
-  Button,
-} from "@material-tailwind/react";
-import { getCartItems } from "../../pages/Home/cart/utils";
+import React from "react";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
-
+// import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../utils/redux/hooks";
+import { addToCartRedux } from "../../utils/redux/slice/cartSlice";
 interface ModiDescription {
   id: string;
+  uniCode: string;
   uniPicture: string;
   uniName: string;
   uniPrice: number;
@@ -23,6 +16,7 @@ interface ModiDescription {
 
 const ProwareCart: React.FC<ModiDescription> = ({
   id,
+  uniCode,
   uniPicture,
   uniName,
   uniPrice,
@@ -30,17 +24,29 @@ const ProwareCart: React.FC<ModiDescription> = ({
   uniStocks,
   uniCategory,
 }) => {
+  const dispatch = useAppDispatch();
   const newItem = {
     id: id,
+    itemCode: uniCode,
     urlPicture: uniPicture,
     itemName: uniName,
     itemPrice: uniPrice,
     itemSize: uniSize,
+    itemCategory: uniCategory,
+    quantity: 0,
+    totalPrice: 0,
   };
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const handleCart = () => {
-    navigate("/cart");
+    // Dispatch addToCart action with the new item
+    dispatch(addToCartRedux(newItem));
+
+    // You can also show a notification or perform other actions if needed
+    Swal.fire("Item added to cart!", "", "success");
+
+    // Navigate to the cart page if needed
+    // navigate("/cart");
   };
 
   return (
@@ -51,21 +57,24 @@ const ProwareCart: React.FC<ModiDescription> = ({
           src={uniPicture}
           alt="Product Image"
         />
-        <div className="absolute top-0 right-0 bg-yellow-500 text-black px-2 py-1 m-2 rounded-md text-sm font-bold">
+        <div className="absolute top-0 right-0 px-2 py-1 m-2 text-sm font-bold text-black bg-yellow-500 rounded-md">
           {uniCategory}
         </div>
       </div>
       <div className="p-4">
         <div className="flex justify-between">
-          <h3 className="text-lg font-bold mb-2">{uniName}</h3>
-          <h3 className="text-lg font-bold mb-2">Size: {uniSize}</h3>
+          <h3 className="mb-2 text-lg font-bold">{uniName}</h3>
+          <h3 className="mb-2 text-lg font-bold">Size: {uniSize}</h3>
         </div>
-        <p className="text-gray-600 text-sm mb-4">
+        <p className="mb-4 text-sm text-gray-600">
           {uniStocks} pieces available
         </p>
         <div className="flex items-center justify-between">
-          <span className="font-bold text-lg">₱ {uniPrice}</span>
-          <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-none">
+          <span className="text-lg font-bold">₱ {uniPrice}</span>
+          <button
+            onClick={handleCart}
+            className="px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-600"
+          >
             ADD TO CART
           </button>
         </div>

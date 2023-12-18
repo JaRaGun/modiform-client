@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import Navbar from "../../../components/navbar/Navbar";
 import ProwareCart from "../../../components/Cards/ProwareCart";
@@ -61,9 +62,9 @@ const Proware: React.FC = () => {
 
   const UniformData = GetCollectionDataFirebase(
     COLLECTIONNAME,
-    selectedGender,
-    selectedSize,
-    selectedCategory
+    selectedGender || "",
+    selectedSize || "",
+    selectedCategory || ""
   );
 
   // console.log(UniformData);
@@ -76,8 +77,8 @@ const Proware: React.FC = () => {
         selectedGender={selectedGender}
       />
 
-      <div className="mb-10 px-10">
-        <div className="flex flex-col space-y-2 md:space-y-0 md:flex-row md:items-center md:justify-start md:space-x-5 w-full md:w-auto">
+      <div className="px-10 mb-10">
+        <div className="flex flex-col w-full space-y-2 md:space-y-0 md:flex-row md:items-center md:justify-start md:space-x-5 md:w-auto">
           <Select
             label="Year Category"
             placeholder={undefined}
@@ -111,6 +112,7 @@ const Proware: React.FC = () => {
           <div className="px-5 py-8" key={item.id}>
             <ProwareCart
               id={item.id}
+              uniCode={item.itemCode}
               uniCategory={item.category}
               uniStocks={item.stocks}
               uniPicture={item.image}
