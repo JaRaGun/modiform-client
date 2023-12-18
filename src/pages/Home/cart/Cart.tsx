@@ -7,10 +7,12 @@ import {
   updateItemInCartRedux,
 } from "../../../utils/redux/slice/cartSlice";
 import CheckOutButton from "./Checkout/CheckOutButton";
+import { removeToCartFirebase } from "../../../firebase/services/index";
 
 const Cart = () => {
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector((state) => state.cart.items);
+  const { studentIdRedux } = useAppSelector((state) => state.user);
   // Create a state variable for the quantity of each item
   // Create a state variable for the quantity of each item
   const [quantities, setQuantities] = useState(
@@ -84,7 +86,7 @@ const Cart = () => {
 
                     <div className="pb-6 mb-8 border-b border-gray-500">
                       <div className="flex flex-wrap items-center ">
-                        <div className="mb-4 mr-2 lg:mb-0 font-bold">
+                        <div className="mb-4 mr-2 font-bold lg:mb-0">
                           Quantity:
                         </div>
                         <div className="mb-4 mr-4 lg:mb-0">
@@ -128,14 +130,23 @@ const Cart = () => {
                     </div>
 
                     <div className="flex flex-wrap items-center">
-                      <div className="mb-4 mr-4 lg:mb-0 font-bold">
+                      <div className="mb-4 mr-4 font-bold lg:mb-0">
                         Total Price: {""}
                         <span>₱{item.itemPrice * quantities[index]}</span>
                       </div>
-
+                      {/* Delete Item Button*/}
                       <div className="mb-4 lg:mb-0">
                         <button
-                          onClick={() => dispatch(removeFromCartRedux(item.id))}
+                          onClick={() =>
+                            dispatch(
+                              removeFromCartRedux(item.id),
+
+                              removeToCartFirebase(
+                                item.itemCode,
+                                studentIdRedux
+                              )
+                            )
+                          }
                           className="flex items-center justify-center w-full h-10 p-2 text-red-500 border border-gray-300 lg:w-11 hover:text-white hover:bg-red-500 hover:border-red-500"
                         >
                           <svg

@@ -6,10 +6,10 @@ import {
   query,
   where,
   addDoc,
-  //   doc,
+  doc,
   //   setDoc,
   //   updateDoc,
-  //   deleteDoc,
+  deleteDoc,
   //   getDoc,
 } from "firebase/firestore";
 
@@ -53,6 +53,34 @@ export const addToCartFirebase = async (
     return querySnapshot;
   } catch (error) {
     console.error("Error fetching data:", error);
+    throw error;
+  }
+};
+
+export const removeToCartFirebase = async (
+  itemCode: string,
+  studentId: number | null
+) => {
+  try {
+    const userRef = collection(db, "users");
+    const querySnapshot = await getDocs(
+      query(userRef, where("studentId", "==", studentId))
+    );
+
+    if (!querySnapshot.empty) {
+      const userDoc = querySnapshot.docs[0];
+      const cartRef = collection(db, "users", userDoc.id, "cart");
+      const cartSnapshot = await getDocs(
+        query(cartRef, where("itemCode", "==", itemCode))
+      );
+
+      if (!cartSnapshot.empty) {
+        const itemDoc = cartSnapshot.docs[0];
+        await deleteDoc(doc(db, "users", userDoc.id, "cart", itemDoc.id));
+      }
+    }
+  } catch (error) {
+    console.error("Error removing item:", error);
     throw error;
   }
 };
