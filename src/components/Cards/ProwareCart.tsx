@@ -1,7 +1,7 @@
 import React from "react";
 import Swal from "sweetalert2";
 // import { useNavigate } from "react-router-dom";
-import { useAppDispatch , useAppSelector} from "../../utils/redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/redux/hooks";
 import { addToCartRedux } from "../../utils/redux/slice/cartSlice";
 import { addToCartFirebase } from "../../firebase/services";
 interface ModiDescription {
@@ -19,7 +19,7 @@ const isStocksZero = (uniStocks: number) => {
     return true;
   }
   return false;
-}
+};
 
 const ProwareCart: React.FC<ModiDescription> = ({
   id,
@@ -45,7 +45,7 @@ const ProwareCart: React.FC<ModiDescription> = ({
   };
 
   // const navigate = useNavigate();
-  const {studentIdRedux} = useAppSelector((state) => state.user);
+  const { studentIdRedux } = useAppSelector((state) => state.user);
   const handleCart = async () => {
     // Dispatch addToCart action with the new item
     await dispatch(addToCartRedux(newItem));
@@ -79,19 +79,21 @@ const ProwareCart: React.FC<ModiDescription> = ({
         </p>
         <div className="flex items-center justify-between">
           <span className="text-lg font-bold">₱ {uniPrice}</span>
-          {
-            isStocksZero(uniStocks) 
-              ? <button
-                  disabled
-                  className={`px-4 py-2 font-bold text-white bg-gray-500 cursor-not-allowed rounded-md`}>
-                  ADD TO CART
-                </button>
-              : <button
-                  onClick={handleCart}
-                  className={`px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-600`}>
-                  ADD TO CART
-                </button>
-          }
+          {isStocksZero(uniStocks) ? (
+            <button
+              disabled
+              className={`px-4 py-2 font-bold text-white bg-gray-500 cursor-not-allowed rounded-md`}
+            >
+              ADD TO CART
+            </button>
+          ) : (
+            <button
+              onClick={handleCart}
+              className={`px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-600`}
+            >
+              ADD TO CART
+            </button>
+          )}
         </div>
       </div>
     </div>

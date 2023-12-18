@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { db } from "../config";
 import {
   collection,
@@ -12,9 +13,13 @@ import {
   //   getDoc,
 } from "firebase/firestore";
 
-export const checkUserData = async (studentId: number|null, password: string) => {
-  console.log("studentFire", studentId);
-  console.log("passwordFire", password);
+export const checkUserData = async (
+  studentId: number | null,
+  password: string
+) => {
+  // console.log("studentFire", studentId);
+  // console.log("passwordFire", password);
+  // eslint-disable-next-line no-useless-catch
   try {
     const userRef = collection(db, "users");
     const querySnapshot = await getDocs(
@@ -30,7 +35,10 @@ export const checkUserData = async (studentId: number|null, password: string) =>
   }
 };
 
-export const addToCartFirebase = async (studentId: number | null, cart: any) => {
+export const addToCartFirebase = async (
+  studentId: number | null,
+  cart: any
+) => {
   try {
     const userRef = collection(db, "users");
     const querySnapshot = await getDocs(
@@ -39,7 +47,7 @@ export const addToCartFirebase = async (studentId: number | null, cart: any) => 
 
     if (!querySnapshot.empty) {
       const userDoc = querySnapshot.docs[0];
-      const cartRef = collection(db, 'users', userDoc.id, 'cart');
+      const cartRef = collection(db, "users", userDoc.id, "cart");
       await addDoc(cartRef, cart);
     }
     return querySnapshot;
@@ -47,6 +55,4 @@ export const addToCartFirebase = async (studentId: number | null, cart: any) => 
     console.error("Error fetching data:", error);
     throw error;
   }
-}
-
-
+};

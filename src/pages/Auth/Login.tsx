@@ -32,29 +32,31 @@ const Login = () => {
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const checkUserCart = await GetItemCartFirebase(studentId);
-    // console.log(checkUserCart);
-    const itemsCartFromFirebase = checkUserCart.map((item) => ({
-      id: item.id,
-      itemCode: item.itemCode,
-      urlPicture: item.urlPicture,
-      itemName: item.itemName,
-      itemPrice: item.itemPrice,
-      itemSize: item.itemSize,
-      itemCategory: item.itemCategory,
-      quantity: item.quantity,
-      totalPrice: item.totalPrice,
-    }));
 
+    // console.log(itemsCartFromFirebase);
     try {
       setIsLoading(true);
+      const checkUserCart = await GetItemCartFirebase(studentId);
+
+      // console.log(checkUserCart);
+      const itemsCartFromFirebase = checkUserCart.map((item) => ({
+        id: item.id,
+        itemCode: item.itemCode,
+        urlPicture: item.urlPicture,
+        itemName: item.itemName,
+        itemPrice: item.itemPrice,
+        itemSize: item.itemSize,
+        itemCategory: item.itemCategory,
+        quantity: item.quantity,
+        totalPrice: item.totalPrice,
+      }));
       const checkUserCredentials = await checkUserData(studentId, password);
       // console.log("checkuser", checkUserCredentials)
 
       if (!checkUserCredentials.empty) {
         const userData = checkUserCredentials.docs[0].data();
 
-        dispatch(
+        await dispatch(
           UserInfoRedux({
             studentIdRedux: userData.studentId,
             passwordRedux: userData.password,
@@ -62,7 +64,9 @@ const Login = () => {
             lastNameRedux: userData.lastName,
           })
         );
-        dispatch(addToCartRedux(itemsCartFromFirebase));
+
+        // Dispatch the addToCartRedux action with itemsCartFromFirebase
+        // dispatch(addToCartRedux(itemsCartFromFirebase));
         localStorage.setItem("userData", JSON.stringify(userData));
 
         setIsLoading(false);
