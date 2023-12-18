@@ -19,6 +19,7 @@ import PIC5 from "../assets/IMGS/CAROUSEL/pic5.jpg";
 import PIC6 from "../assets/IMGS/CAROUSEL/pic6.jpg";
 import PIC7 from "../assets/IMGS/CAROUSEL/pic7.jpg";
 import PIC8 from "../assets/IMGS/CAROUSEL/pic8.jpg";
+import LOGOLOGINS from "../assets/IMGS/LogoLogins.png"
 
 export default {
   MODILOGO,
@@ -41,4 +42,5 @@ export default {
   PIC6,
   PIC7,
   PIC8,
+  LOGOLOGINS
 };

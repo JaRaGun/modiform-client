@@ -97,14 +97,11 @@ const Login = () => {
               <div className="text-center">
                 <div className="flex justify-center mx-auto">
                   <img
-                    className="w-auto h-36 sm:h-48"
-                    src={images.MODILOGO}
+                    className="w-auto h-64 sm:h-80"
+                    src={images.LOGOLOGINS}
                     alt=""
                   />
                 </div>
-                <p className="mt-3 text-3xl font-extrabold text-yellow-400 ">
-                  MODIFORM
-                </p>
               </div>
 
               <div className="mt-8">
