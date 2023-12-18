@@ -17,7 +17,7 @@ const Login = () => {
   const [studentId, setUserStudentId] = useState<number | null>(null); // Change initial state to null
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const checkUserCart = GetItemCartFirebase(studentId);
+
   const handleuserStudentIdChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -31,13 +31,22 @@ const Login = () => {
   };
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
-    
     event.preventDefault();
-
-// console.log(checkUserCart);
+    const checkUserCart = await GetItemCartFirebase(studentId);
+    // console.log(checkUserCart);
+    const itemsCartFromFirebase = checkUserCart.map((item) => ({
+      id: item.id,
+      itemCode: item.itemCode,
+      urlPicture: item.urlPicture,
+      itemName: item.itemName,
+      itemPrice: item.itemPrice,
+      itemSize: item.itemSize,
+      itemCategory: item.itemCategory,
+      quantity: item.quantity,
+      totalPrice: item.totalPrice,
+    }));
 
     try {
-      
       setIsLoading(true);
       const checkUserCredentials = await checkUserData(studentId, password);
       // console.log("checkuser", checkUserCredentials)
@@ -53,8 +62,9 @@ const Login = () => {
             lastNameRedux: userData.lastName,
           })
         );
+        dispatch(addToCartRedux(itemsCartFromFirebase));
         localStorage.setItem("userData", JSON.stringify(userData));
-        
+
         setIsLoading(false);
         navigate("/home");
         // console.log(userData);
@@ -92,7 +102,7 @@ const Login = () => {
                 <h2 className="text-xl text-white sm:text-4xl">
                   BE UNIFORM READY.
                 </h2>
-                <p className="max-w-full mt-3 text-white font-extrabold text-5xl">
+                <p className="max-w-full mt-3 text-5xl font-extrabold text-white">
                   PRO-WARE MAKES IT EASY.
                 </p>
               </div>
