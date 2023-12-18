@@ -83,13 +83,11 @@ const Login = () => {
           >
             <div className="flex items-center h-full px-20 bg-gray-900 bg-opacity-40 ">
               <div className="mt-80">
-                <h2 className="text-2xl font-bold text-white sm:text-3xl">
-                  MODIFORM
+                <h2 className="text-xl text-white sm:text-4xl">
+                  BE UNIFORM READY.
                 </h2>
-                <p className="max-w-xl mt-3 text-gray-300">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. In
-                  autem ipsa, nulla laboriosam dolores, repellendus perferendis
-                  libero suscipit nam temporibus molestiae
+                <p className="max-w-full mt-3 text-white font-extrabold text-5xl">
+                  PRO-WARE MAKES IT EASY.
                 </p>
               </div>
             </div>

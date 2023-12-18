@@ -105,7 +105,7 @@ const Navbar = () => {
                   <Badge
                     color="primary"
                     badgeContent={itemCount}
-                    showZero
+                    // showZero
                     // variant="dot"
                   >
                     <ShoppingCartIcon
@@ -187,7 +187,7 @@ const Navbar = () => {
                   <Badge
                     color="primary"
                     badgeContent={itemCount}
-                    showZero
+                    // showZero
                     // variant="dot"
                   >
                     <ShoppingCartIcon

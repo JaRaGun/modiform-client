@@ -84,7 +84,9 @@ const Cart = () => {
 
                     <div className="pb-6 mb-8 border-b border-gray-500">
                       <div className="flex flex-wrap items-center ">
-                        <div className="mb-4 mr-2 lg:mb-0">Quantity:</div>
+                        <div className="mb-4 mr-2 lg:mb-0 font-bold">
+                          Quantity:
+                        </div>
                         <div className="mb-4 mr-4 lg:mb-0">
                           <div className="w-28">
                             <div className="relative flex flex-row w-full h-10 bg-transparent rounded-lg">
@@ -126,7 +128,7 @@ const Cart = () => {
                     </div>
 
                     <div className="flex flex-wrap items-center">
-                      <div className="mb-4 mr-4 lg:mb-0">
+                      <div className="mb-4 mr-4 lg:mb-0 font-bold">
                         Total Price: {""}
                         <span>₱{item.itemPrice * quantities[index]}</span>
                       </div>
@@ -134,7 +136,7 @@ const Cart = () => {
                       <div className="mb-4 lg:mb-0">
                         <button
                           onClick={() => dispatch(removeFromCartRedux(item.id))}
-                          className="flex items-center justify-center w-full h-10 p-2 text-gray-500 border border-gray-300 lg:w-11 hover:text-white hover:bg-red-500 hover:border-red-500"
+                          className="flex items-center justify-center w-full h-10 p-2 text-red-500 border border-gray-300 lg:w-11 hover:text-white hover:bg-red-500 hover:border-red-500"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -158,11 +160,10 @@ const Cart = () => {
               </div>
             ))
           ) : (
-            <div className="text-center">
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
               <h1 className="mb-4 text-6xl font-semibold text-red-500">
                 No Items in Cart
               </h1>
-
               <p className="mt-4 text-gray-600">
                 Let's get you back{" "}
                 <a href="/proware" className="text-blue-500">
