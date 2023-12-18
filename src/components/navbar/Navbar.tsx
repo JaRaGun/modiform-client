@@ -13,8 +13,9 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useNavigate } from "react-router-dom";
 import { Link as RouterLink } from "react-router-dom";
 import { Button } from "@mui/material";
-import { useAppDispatch } from "../../utils/redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/redux/hooks";
 import { logoutUserRedux } from "../../utils/redux/slice/userSlice";
+import { clearCartRedux } from "../../utils/redux/slice/cartSlice";
 
 const Navbar = () => {
   // FOR RESPONSIVE
@@ -35,6 +36,7 @@ const Navbar = () => {
   const dispatch = useAppDispatch();
   const handleLogOut = async () => {
     await dispatch(logoutUserRedux());
+    await dispatch(clearCartRedux());
     await localStorage.clear();
     navigate("/");
   };
@@ -48,8 +50,7 @@ const Navbar = () => {
     navigate("/cart");
   };
 
-  const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
-  const cartItemsCount = cartItems.length;
+  const itemCount = useAppSelector((state) => state.cart.items.length);
 
   return (
     <div className="sticky top-0 z-50 ">
@@ -70,7 +71,7 @@ const Navbar = () => {
                   to="/home"
                   aria-label="HOME"
                   title="HOME"
-                  className="tracking-wide text-white hover:text-yellow-400 font-bold"
+                  className="font-bold tracking-wide text-white hover:text-yellow-400"
                 >
                   HOME
                 </RouterLink>
@@ -80,7 +81,7 @@ const Navbar = () => {
                   to="/proware"
                   aria-label="PROWARE"
                   title="PROWARE"
-                  className="tracking-wide text-white hover:text-yellow-400 font-bold"
+                  className="font-bold tracking-wide text-white hover:text-yellow-400"
                 >
                   PROWARE SHOP
                 </RouterLink>
@@ -90,7 +91,7 @@ const Navbar = () => {
                   to="/contact"
                   aria-label="CONTACT"
                   title="CONTACT"
-                  className="tracking-wide text-white hover:text-yellow-400 font-bold"
+                  className="font-bold tracking-wide text-white hover:text-yellow-400"
                 >
                   CONTACT
                 </RouterLink>
@@ -103,7 +104,7 @@ const Navbar = () => {
                 <Button>
                   <Badge
                     color="primary"
-                    badgeContent={cartItemsCount}
+                    badgeContent={itemCount}
                     showZero
                     // variant="dot"
                   >
@@ -179,13 +180,13 @@ const Navbar = () => {
             </React.Fragment>
           </ul>
 
-          <div className="lg:hidden flex items-center justify-between">
-            <ul className="px-2 items-center lg:flex">
+          <div className="flex items-center justify-between lg:hidden">
+            <ul className="items-center px-2 lg:flex">
               <Tooltip title="Modiform Cart">
                 <Button>
                   <Badge
                     color="primary"
-                    badgeContent={cartItemsCount}
+                    badgeContent={itemCount}
                     showZero
                     // variant="dot"
                   >
@@ -206,7 +207,7 @@ const Navbar = () => {
               className="p-1 -mr-1 transition duration-200 rounded hover:bg-gray-600 focus:bg-gray-900"
               onClick={() => setIsMenuOpen(true)}
             >
-              <svg className="w-7 text-white " viewBox="0 0 24 24">
+              <svg className="text-white w-7 " viewBox="0 0 24 24">
                 <path
                   fill="currentColor"
                   d="M23,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,13,23,13z"
@@ -262,7 +263,7 @@ const Navbar = () => {
                           to="/home"
                           aria-label="HOME"
                           title="HOME"
-                          className="tracking-wide text-white hover:text-yellow-400 font-bold"
+                          className="font-bold tracking-wide text-white hover:text-yellow-400"
                         >
                           HOME
                         </RouterLink>
@@ -272,7 +273,7 @@ const Navbar = () => {
                           to="/proware"
                           aria-label="PROWARE"
                           title="PROWARE"
-                          className="tracking-wide text-white hover:text-yellow-400 font-bold"
+                          className="font-bold tracking-wide text-white hover:text-yellow-400"
                         >
                           PROWARE SHOP
                         </RouterLink>
@@ -282,7 +283,7 @@ const Navbar = () => {
                           to="/contact"
                           aria-label="CONTACT"
                           title="CONTACT"
-                          className="tracking-wide text-white hover:text-yellow-400 font-bold"
+                          className="font-bold tracking-wide text-white hover:text-yellow-400"
                         >
                           CONTACT
                         </RouterLink>
@@ -292,14 +293,14 @@ const Navbar = () => {
                         onClick={handleProfile}
                         aria-label="PROFILE"
                         title="PROFILE"
-                        className="tracking-wide text-white hover:text-yellow-400 font-bold"
+                        className="font-bold tracking-wide text-white hover:text-yellow-400"
                       >
                         PROFILE
                       </li>
 
                       <li
                         onClick={handleLogOut}
-                        className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white rounded shadow-md bg-gray-500 hover:bg-yellow-700"
+                        className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white bg-gray-500 rounded shadow-md hover:bg-yellow-700"
                         aria-label="Sign up"
                         title="Sign up"
                       >

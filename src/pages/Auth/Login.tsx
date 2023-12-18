@@ -104,7 +104,7 @@ const Login = () => {
                     alt=""
                   />
                 </div>
-                <p className="mt-3 text-yellow-400 font-extrabold text-3xl ">
+                <p className="mt-3 text-3xl font-extrabold text-yellow-400 ">
                   MODIFORM
                 </p>
               </div>
@@ -134,7 +134,7 @@ const Login = () => {
                     />
 
                     {isLoading ? (
-                      <div className="flex justify-center items-center">
+                      <div className="flex items-center justify-center">
                         <Spinner color="blue" className="w-10 h-10" />
                       </div>
                     ) : (

@@ -5,6 +5,7 @@ import { useAppDispatch } from "../../utils/redux/hooks";
 import { addToCartRedux } from "../../utils/redux/slice/cartSlice";
 interface ModiDescription {
   id: string;
+  uniCode: string;
   uniPicture: string;
   uniName: string;
   uniPrice: number;
@@ -15,6 +16,7 @@ interface ModiDescription {
 
 const ProwareCart: React.FC<ModiDescription> = ({
   id,
+  uniCode,
   uniPicture,
   uniName,
   uniPrice,
@@ -25,11 +27,14 @@ const ProwareCart: React.FC<ModiDescription> = ({
   const dispatch = useAppDispatch();
   const newItem = {
     id: id,
+    itemCode: uniCode,
     urlPicture: uniPicture,
     itemName: uniName,
     itemPrice: uniPrice,
     itemSize: uniSize,
     itemCategory: uniCategory,
+    quantity: 0,
+    totalPrice: 0,
   };
 
   // const navigate = useNavigate();

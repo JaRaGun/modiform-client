@@ -20,26 +20,25 @@ export function GetCollectionDataFirebase(
   const [data, setData] = useState<any>([]);
 
   useEffect(() => {
-    let docRef: any = collection(db, doc);
-
-    if (gender && size && category) {
+    if (doc && gender && size && category) {
+      let docRef: any = collection(db, doc);
       docRef = query(
         docRef,
         where("gender", "==", gender),
         where("size", "==", size),
         where("tag", "==", category)
       );
+
+      const unsubscribe = onSnapshot(docRef, (snapshot: QuerySnapshot) => {
+        const dataCollection = snapshot.docs.map((doc) => doc.data());
+        setData(dataCollection);
+      });
+
+      // Clean up the listener when the component unmounts
+      return () => {
+        unsubscribe();
+      };
     }
-
-    const unsubscribe = onSnapshot(docRef, (snapshot: QuerySnapshot) => {
-      const dataCollection = snapshot.docs.map((doc) => doc.data());
-      setData(dataCollection);
-    });
-
-    // Clean up the listener when the component unmounts
-    return () => {
-      unsubscribe();
-    };
   }, [doc, gender, size, category]);
 
   return data;

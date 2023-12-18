@@ -7,12 +7,12 @@ const Contact = () => {
     <div className="bg-SecondaryBG" style={{ minHeight: "calc(100vh" }}>
       <Navbar />
       <div>
-        <div className="py-16 lg:py-24 px-5 lg:px-24 grid grid-cols-1 lg:grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 gap-2 px-5 py-16 lg:py-24 lg:px-24 lg:grid-cols-2">
           <div>
-            <h1 className="font-extrabold text-5xl">CONTACT US</h1>
-            <p className="text-sm mt-1">LET US KNOW YOUR CONCERN</p>
+            <h1 className="text-5xl font-extrabold">CONTACT US</h1>
+            <p className="mt-1 text-sm">LET US KNOW YOUR CONCERN</p>
 
-            <div className="space-y-5 mt-10">
+            <div className="mt-10 space-y-5">
               <Input
                 label="Full Name"
                 variant="outlined"
@@ -30,7 +30,7 @@ const Contact = () => {
               </div>
 
               <Button
-                className="bg-blue-500 hover:bg-green-500 text-black font-base"
+                className="text-black bg-blue-500 hover:bg-green-500 font-base"
                 fullWidth
                 variant="filled"
                 placeholder={undefined}
@@ -42,7 +42,7 @@ const Contact = () => {
           </div>
 
           <img
-            className="mx-auto hidden md:hidden lg:block" // Hide on mobile view (hidden class) and display on larger screens (md:block)
+            className="hidden mx-auto md:hidden lg:block" // Hide on mobile view (hidden class) and display on larger screens (md:block)
             src={images.CONTACTS}
             width={500}
             alt="CONTACT IMAGE"

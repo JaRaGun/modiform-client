@@ -61,9 +61,9 @@ const Proware: React.FC = () => {
 
   const UniformData = GetCollectionDataFirebase(
     COLLECTIONNAME,
-    selectedGender,
-    selectedSize,
-    selectedCategory
+    selectedGender || "",
+    selectedSize || "",
+    selectedCategory || ""
   );
 
   // console.log(UniformData);
@@ -111,6 +111,7 @@ const Proware: React.FC = () => {
           <div className="px-5 py-8" key={item.id}>
             <ProwareCart
               id={item.id}
+              uniCode={item.itemCode}
               uniCategory={item.category}
               uniStocks={item.stocks}
               uniPicture={item.image}
