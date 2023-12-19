@@ -13,6 +13,7 @@ const Contact = () => {
   const { studentIdRedux, firstNameRedux } = useAppSelector(
     (state) => state.user
   );
+  
   // Your EmailJS service ID, template ID, and Public Key
   const serviceId = "service_2ro22pb";
   const templateId = "template_axscyr7";
