@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 // import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../utils/redux/hooks";
@@ -33,7 +33,18 @@ const ProwareCart: React.FC<ModiDescription> = ({
   uniCategory,
   uniClass,
 }) => {
+  const getItemButtonText = (itemId: string) => {
+    return localStorage.getItem(`buttonText_${itemId}`) || "ADD TO CART";
+  };
+
+  const setItemButtonText = (itemId: string, text: string) => {
+    localStorage.setItem(`buttonText_${itemId}`, text);
+  };
+
+  const [buttonText, setButtonText] = useState(getItemButtonText(id));
+
   const dispatch = useAppDispatch();
+
   const newItem = {
     id: id,
     itemCode: uniCode,
@@ -50,15 +61,27 @@ const ProwareCart: React.FC<ModiDescription> = ({
   // const navigate = useNavigate();
   const { studentIdRedux } = useAppSelector((state) => state.user);
   const handleCart = async () => {
-    // Dispatch addToCart action with the new item
-    await dispatch(addToCartRedux(newItem));
-    await addToCartFirebase(studentIdRedux, newItem);
-    // You can also show a notification or perform other actions if needed
-    Swal.fire("Item added to cart!", "", "success");
-
-    // Navigate to the cart page if needed
-    // navigate("/cart");
+    if (buttonText === "VIEW CART") {
+      // Handle logic for "ALREADY ADDED TO YOUR CART" scenario
+      Swal.fire("ALREADY ADDED TO YOUR CART", "", "info");
+    } else {
+      // Dispatch addToCart action with the new item
+      await dispatch(addToCartRedux(newItem));
+      await addToCartFirebase(studentIdRedux, newItem);
+      // Update button text and show success message
+      setButtonText("VIEW CART");
+      Swal.fire("Item added to cart!", "", "success");
+      setItemButtonText(id, "VIEW CART"); // Save to localStorage for this specific item
+    }
   };
+
+  useEffect(() => {
+    // Check if the button text was set to "VIEW CART" before for this specific item
+    const savedButtonText = getItemButtonText(id);
+    if (savedButtonText === "VIEW CART") {
+      setButtonText("VIEW CART");
+    }
+  }, [id]);
 
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-lg max-w-sm max-h-[1000px] hover:shadow-xl">
@@ -87,14 +110,14 @@ const ProwareCart: React.FC<ModiDescription> = ({
               disabled
               className={`px-4 py-2 font-bold text-white bg-gray-500 cursor-not-allowed rounded-md`}
             >
-              ADD TO CART
+              {buttonText}
             </button>
           ) : (
             <button
               onClick={handleCart}
               className={`px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-600`}
             >
-              ADD TO CART
+              {buttonText}
             </button>
           )}
         </div>

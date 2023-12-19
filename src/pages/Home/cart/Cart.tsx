@@ -132,7 +132,7 @@ const Cart = () => {
                     <div className="flex flex-wrap items-center">
                       <div className="mb-4 mr-4 font-bold lg:mb-0">
                         Total Price: {""}
-                        <span>₱{item.itemPrice * quantities[index]}</span>
+                        <span>₱{item.itemPrice * quantities[index]}.00</span>
                       </div>
                       {/* Delete Item Button*/}
                       <div className="mb-4 lg:mb-0">
