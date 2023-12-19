@@ -11,6 +11,7 @@ interface CartItemInterface {
   itemCategory: string;
   quantity: number;
   totalPrice: number; // Add a totalPrice field
+  itemClass: string;
 }
 
 interface CartState {

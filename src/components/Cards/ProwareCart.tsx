@@ -13,6 +13,7 @@ export interface ModiDescription {
   uniSize: string;
   uniStocks: number;
   uniCategory: string;
+  uniClass: string;
 }
 const isStocksZero = (uniStocks: number) => {
   if (uniStocks === 0) {
@@ -30,6 +31,7 @@ const ProwareCart: React.FC<ModiDescription> = ({
   uniSize,
   uniStocks,
   uniCategory,
+  uniClass,
 }) => {
   const dispatch = useAppDispatch();
   const newItem = {
@@ -42,6 +44,7 @@ const ProwareCart: React.FC<ModiDescription> = ({
     itemCategory: uniCategory,
     quantity: 0,
     totalPrice: 0,
+    itemClass: uniClass,
   };
 
   // const navigate = useNavigate();

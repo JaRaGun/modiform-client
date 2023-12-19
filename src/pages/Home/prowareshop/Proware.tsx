@@ -67,7 +67,7 @@ const Proware: React.FC = () => {
     selectedCategory || ""
   );
 
-  // console.log(UniformData);
+  console.log(UniformData);
   return (
     <div>
       <Navbar />
@@ -112,6 +112,7 @@ const Proware: React.FC = () => {
           <div className="px-5 py-8" key={item.id}>
             <ProwareCart
               id={item.id}
+              uniClass={item.inventoryClass}
               uniCode={item.itemCode}
               uniCategory={item.category}
               uniStocks={item.stocks}
