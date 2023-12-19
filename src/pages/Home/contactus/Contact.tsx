@@ -3,24 +3,34 @@ import images from "../../../themes/images";
 import Navbar from "../../../components/navbar/Navbar";
 import emailjs from "emailjs-com";
 import { useState } from "react";
-
+import { useAppSelector } from "../../../utils/redux/hooks";
+import Swal from "sweetalert2";
+import { AddNotificationsToFirebase } from "../../../firebase/services";
 const Contact = () => {
   const [name, setName] = useState("");
   const [account, setAccount] = useState("");
   const [message, setMessage] = useState("");
+  const { studentIdRedux, firstNameRedux } = useAppSelector(
+    (state) => state.user
+  );
+  // Your EmailJS service ID, template ID, and Public Key
+  const serviceId = "service_2ro22pb";
+  const templateId = "template_axscyr7";
+  const publicKey = "y3doIGwMo0uL3fRAQ";
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleEmailMessage = (e: any) => {
     e.preventDefault();
-
-    // Your EmailJS service ID, template ID, and Public Key
-    const serviceId = "service_2ro22pb";
-    const templateId = "template_axscyr7";
-    const publicKey = "y3doIGwMo0uL3fRAQ";
 
     // Validate the recipient's email before sending
     if (!account || !account.trim()) {
       console.error("Recipient's email is empty or contains only whitespace!");
       // Optionally, inform the user about the empty email field
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Recipient's email is empty or contains only whitespace!",
+      });
       return;
     }
 
@@ -35,14 +45,20 @@ const Contact = () => {
     // Send the email using EmailJS
     emailjs
       .send(serviceId, templateId, templateParams, publicKey)
-      .then((response) => {
-        console.log("Email sent successfully!", response);
+      .then(() => {
+        // console.log("Email sent successfully!", response);
+        AddNotificationsToFirebase(
+          studentIdRedux,
+          "You have a new message from " + firstNameRedux
+        );
+        Swal.fire("Success", "Your message has been sent!", "success");
         setName("");
         setAccount("");
         setMessage("");
       })
       .catch((error) => {
         console.error("Error sending email:", error);
+        Swal.fire("Error", "There was an error sending your message.", "error");
       });
   };
 

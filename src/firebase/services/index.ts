@@ -115,6 +115,7 @@ export const AddItemOrderToFirebase = async (
     totalItems,
     totalAmount,
     username,
+    status: "pending",
   });
   try {
     const querySnapshot = await getDocs(
@@ -123,7 +124,7 @@ export const AddItemOrderToFirebase = async (
 
     if (!querySnapshot.empty) {
       const orderDoc = querySnapshot.docs[0];
-      const invoiceRef = collection(db, "orders", orderDoc.id, "odersItems");
+      const invoiceRef = collection(db, "orders", orderDoc.id, "ordersItems");
 
       // Add each cart item as a separate document in the invoice collection
       for (const item of cartItems) {
