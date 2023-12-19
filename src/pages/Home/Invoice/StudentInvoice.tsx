@@ -61,7 +61,7 @@ const StudentInvoice = () => {
         {/* END INVOINCE GRID*/}
 
         {/* Table */}
-        <div className="mt-6 border border-gray-500 rounded-lg space-y-2">
+        <div className="mt-6 border border-gray-500 rounded-lg space-y-2 space-x-2">
           <div className="hidden sm:grid sm:grid-cols-6 bg-gray-200 border md:py-2 md:px-2 rounded-lg">
             <div className="sm:col-span-2 text-sm text-black font-bold uppercase">
               ITEM CODE
