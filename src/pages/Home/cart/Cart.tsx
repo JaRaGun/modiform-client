@@ -1,23 +1,35 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Navbar from "../../../components/navbar/Navbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../../../utils/redux/hooks";
 import {
   removeFromCartRedux,
   updateItemInCartRedux,
 } from "../../../utils/redux/slice/cartSlice";
 import CheckOutButton from "./Checkout/CheckOutButton";
-import { removeToCartFirebase } from "../../../firebase/services/index";
+import {
+  removeToCartFirebase,
+  CheckIsOrderExist,
+} from "../../../firebase/services/index";
 
 const Cart = () => {
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector((state) => state.cart.items);
   const { studentIdRedux } = useAppSelector((state) => state.user);
-  // Create a state variable for the quantity of each item
+  const [hasInvoiceData, setHasInvoiceData] = useState(false);
   // Create a state variable for the quantity of each item
   const [quantities, setQuantities] = useState(
     cartItems.map((item) => item.quantity) // Initialize quantities to the current quantity of each item
   );
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await CheckIsOrderExist(studentIdRedux);
+      setHasInvoiceData(data);
+    };
+
+    fetchData();
+  }, [studentIdRedux]);
+
   // Function to handle quantity changes
   const handleQuantityChange = (index: number, delta: number) => {
     setQuantities((prevQuantities: any) => {
@@ -172,7 +184,7 @@ const Cart = () => {
             ))
           ) : (
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <h1 className="mb-4 text-4xl md:text-6xl font-semibold text-red-500">
+              <h1 className="mb-4 text-4xl font-semibold text-red-500 md:text-6xl">
                 No Items in Cart
               </h1>
               <p className="mt-4 text-gray-600">
@@ -182,11 +194,13 @@ const Cart = () => {
                 </a>
               </p>
 
-              <p className="mt-4 text-gray-600">
-                <a href="/receipt" className="text-blue-500">
-                  View your invoice
-                </a>
-              </p>
+              {hasInvoiceData && (
+                <p className="mt-4 text-gray-600">
+                  <a href="/receipt" className="text-blue-500">
+                    View your invoice
+                  </a>
+                </p>
+              )}
             </div>
           )}
         </div>

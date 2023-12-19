@@ -196,3 +196,16 @@ export const AddNotificationsToFirebase = async (
     throw error;
   }
 };
+
+export const CheckIsOrderExist = async (studentId: number | null) => {
+  try {
+    const userRef = collection(db, "orders");
+    const querySnapshot = await getDocs(
+      query(userRef, where("studentId", "==", studentId))
+    );
+    return !querySnapshot.empty;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+};
