@@ -181,6 +181,12 @@ const Cart = () => {
                   Proware Shop
                 </a>
               </p>
+
+              <p className="mt-4 text-gray-600">
+                <a href="/receipt" className="text-blue-500">
+                  View your invoice
+                </a>
+              </p>
             </div>
           )}
         </div>
