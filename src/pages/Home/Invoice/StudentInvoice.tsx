@@ -20,10 +20,15 @@ const StudentInvoice = () => {
         </div>
 
         {/* INVOINCE GRID */}
-        <div className="mb-5 pb-5 flex justify-between items-center border-b border-gray-800">
+        <div className="mb-5 pb-2 flex justify-between items-center border-b border-gray-800">
           <div>
-            <h2 className="text-lg md:text-2xl font-semibold text-gray-800 dark:text-gray-200">
+            <h2 className="text-lg md:text-2xl font-semibold text-gray-800">
               Invoice Receipt
+            </h2>
+
+            <h2 className="text-xs font-base text-gray-800">
+              INVOINCE NO: {""}
+              <span>#1231</span>
             </h2>
           </div>
 
@@ -56,16 +61,13 @@ const StudentInvoice = () => {
         {/* END INVOINCE GRID*/}
 
         {/* Table */}
-        <div className="mt-6 border border-gray-500 p-4 rounded-lg space-y-2">
-          <div className="hidden sm:grid sm:grid-cols-7 bg-gray-200 border md:py-2 md:px-2 rounded-lg">
+        <div className="mt-6 border border-gray-500 rounded-lg space-y-2">
+          <div className="hidden sm:grid sm:grid-cols-6 bg-gray-200 border md:py-2 md:px-2 rounded-lg">
             <div className="sm:col-span-2 text-sm text-black font-bold uppercase">
-              INVOINCE NO
+              ITEM CODE
             </div>
             <div className="text-start text-sm text-black font-bold uppercase">
-              STUDENT ID
-            </div>
-            <div className="text-start text-sm text-black font-bold uppercase">
-              NAME
+              ITEM DESCRIPTION
             </div>
             <div className="text-start text-sm text-black font-bold uppercase">
               QUANTITY
@@ -79,37 +81,28 @@ const StudentInvoice = () => {
           </div>
 
           <div className="hidden sm:block" />
-          <div className="grid grid-cols-1 sm:grid-cols-7 space-y-3 md:py-2 md:px-2">
+          <div className="grid grid-cols-1 sm:grid-cols-6 space-y-3 md:py-2 md:px-2">
             <div className="col-span-full sm:col-span-2">
               <h5 className="sm:hidden text-xs font-medium text-gray-500 uppercase">
-                INVOICE NO
+                ITEM CODE
               </h5>
               <p className="font-medium text-gray-800 dark:text-gray-200">
-                #101011
+                IT10101
               </p>
             </div>
 
             <div>
               <h5 className="sm:hidden text-xs font-medium text-gray-500 uppercase">
-                STUDENT ID
+                ITEM DESCRIPTION
               </h5>
-              <p className="text-gray-800 dark:text-gray-200">020002223</p>
-            </div>
-
-            <div>
-              <h5 className="sm:hidden text-xs font-medium text-gray-500 uppercase">
-                NAME
-              </h5>
-              <p className="text-gray-800 dark:text-gray-200">
-                JESELLE V. VICTORIA
-              </p>
+              <p className="text-gray-800 dark:text-gray-200">IT PANTS</p>
             </div>
 
             <div>
               <h5 className="sm:hidden text-xs font-medium text-gray-500 uppercase">
                 QUANTITY
               </h5>
-              <p className="sm:text-start text-gray-800">3</p>
+              <p className="text-gray-800 dark:text-gray-200">3</p>
             </div>
 
             <div>
@@ -135,27 +128,9 @@ const StudentInvoice = () => {
             {/* Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-2">
               <dl className="grid sm:grid-cols-5 gap-x-3 text-sm">
-                <dt className="col-span-3 text-gray-500">ITEM CODE:</dt>
+                <dt className="col-span-3 text-gray-500">STUDENT ID:</dt>
                 <dd className="col-span-2 font-medium text-gray-800 dark:text-gray-200">
-                  IT10101
-                </dd>
-              </dl>
-              <dl className="grid sm:grid-cols-5 gap-x-3 text-sm">
-                <dt className="col-span-3 text-gray-500">ITEM DESCRIPTION:</dt>
-                <dd className="col-span-2 font-medium text-gray-800 dark:text-gray-200">
-                  IT PANTS
-                </dd>
-              </dl>
-              <dl className="grid sm:grid-cols-5 gap-x-3 text-sm">
-                <dt className="col-span-3 text-gray-500">INVETORY CLASS:</dt>
-                <dd className="col-span-2 font-medium text-gray-800 dark:text-gray-200">
-                  UNIFORM
-                </dd>
-              </dl>
-              <dl className="grid sm:grid-cols-5 gap-x-3 text-sm">
-                <dt className="col-span-3 text-gray-500">TOTAL ITEMS:</dt>
-                <dd className="col-span-2 font-medium text-gray-800 dark:text-gray-200">
-                  3
+                  020000202
                 </dd>
               </dl>
               <dl className="grid sm:grid-cols-5 gap-x-3 text-sm">
