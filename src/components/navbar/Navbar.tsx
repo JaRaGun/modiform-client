@@ -43,7 +43,7 @@ const Navbar = () => {
 
   // PROFILE
   const handleProfile = () => {
-    navigate("/");
+    navigate("/profile");
   };
 
   const handleCart = () => {

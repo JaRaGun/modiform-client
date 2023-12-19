@@ -172,7 +172,7 @@ const Cart = () => {
             ))
           ) : (
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <h1 className="mb-4 text-6xl font-semibold text-red-500">
+              <h1 className="mb-4 text-4xl md:text-6xl font-semibold text-red-500">
                 No Items in Cart
               </h1>
               <p className="mt-4 text-gray-600">
