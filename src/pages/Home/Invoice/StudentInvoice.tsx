@@ -2,8 +2,9 @@
 import Navbar from "../../../components/navbar/Navbar";
 import { useAppSelector } from "../../../utils/redux/hooks";
 import { GetOrderItemsByStudentID } from "../../../firebase/hooks";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { GetOrderDetailsByStudentID } from "../../../firebase/hooks";
+import ReactToPrint from 'react-to-print';
 const StudentInvoice = () => {
   const { studentIdRedux, firstNameRedux, lastNameRedux } = useAppSelector(
     (state) => state.user
@@ -29,12 +30,14 @@ const StudentInvoice = () => {
     fetchData();
   }, [studentIdRedux]);
 
+  const componentRef = useRef();
+
   // console.log(orderDetails);
   return (
     <>
       <Navbar />
 
-      <div className="px-8 py-4 mx-4 my-auto bg-white rounded-md hover:bg-gray-100 lg:mx-10">
+      <div ref={componentRef} className="px-8 py-4 mx-4 my-auto bg-white rounded-md hover:bg-gray-100 lg:mx-10">
         <div className="w-full px-4 py-2 my-3 rounded-md bg-blue-50">
           <h1>
             Thank you {""}
@@ -64,30 +67,7 @@ const StudentInvoice = () => {
           </div>
 
           {/* Col */}
-          <div className="inline-flex gap-x-2">
-            <a
-              className="inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 align-middle transition-all bg-white border rounded-lg shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
-              href="#"
-            >
-              <svg
-                className="flex-shrink-0 w-4 h-4"
-                xmlns="http://www.w3.org/2000/svg"
-                width={24}
-                height={24}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="7 10 12 15 17 10" />
-                <line x1={12} x2={12} y1={15} y2={3} />
-              </svg>
-              Invoice PDF
-            </a>
-          </div>
+       
         </div>
         {/* END INVOINCE GRID*/}
 
@@ -185,6 +165,36 @@ const StudentInvoice = () => {
           </div>
         </div>
       </div>
+      <ReactToPrint
+  trigger={() => (
+    <div className="flex justify-end py-5 px-5">
+    <a
+      className="inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 align-middle transition-all bg-white border rounded-lg shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
+      href="#"
+    >
+      <svg
+        className="flex-shrink-0 w-4 h-4"
+        xmlns="http://www.w3.org/2000/svg"
+        width={24}
+        height={24}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <polyline points="7 10 12 15 17 10" />
+        <line x1={12} x2={12} y1={15} y2={3} />
+      </svg>
+      Invoice PDF
+    </a>
+  </div>
+  )}
+  content={() => componentRef.current}
+/>  
+      
     </>
   );
 };
