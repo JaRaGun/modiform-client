@@ -14,7 +14,9 @@ interface NotificationItemProps {
   primaryText: string;
   timeAgo: string;
 }
-
+import { useAppSelector } from "../../../utils/redux/hooks";
+import { GetNotificationsFromFirebase } from "../../../firebase/hooks";
+import { useEffect, useState } from "react";
 function ClockIcon() {
   return (
     <svg
@@ -71,6 +73,16 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
 );
 
 const Notifications = () => {
+  const { studentIdRedux } = useAppSelector((state) => state.user);
+
+  const [notifications, setNotification] = useState([]);
+  useEffect(() => {
+    const fetchNotification = async () => {
+      const data: any = await GetNotificationsFromFirebase(studentIdRedux);
+      setNotification(data);
+    };
+    fetchNotification();
+  }, []);
   return (
     <Menu>
       <MenuHandler>
@@ -90,25 +102,13 @@ const Notifications = () => {
         </IconButton>
       </MenuHandler>
 
-      <MenuList className="flex flex-col gap-2" placeholder={undefined}>
-        <NotificationItem
-          avatarSrc="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-          altText="tania andrew"
-          primaryText="Tania sent you a message"
-          timeAgo="13 minutes ago"
-        />
-        <NotificationItem
-          avatarSrc="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1061&q=80"
-          altText="natali craig"
-          primaryText="Natali replied to your email"
-          timeAgo="1 hour ago"
-        />
-        <NotificationItem
-          avatarSrc="https://dwglogo.com/wp-content/uploads/2016/08/PayPal_Logo_Icon.png"
-          altText="paypal"
-          primaryText="You've received a payment"
-          timeAgo="5 hours ago"
-        />
+      <MenuList
+        className="flex flex-col gap-2"
+        placeholder={undefined}
+      >
+        {notifications.map()=>(
+
+        )}
       </MenuList>
     </Menu>
   );

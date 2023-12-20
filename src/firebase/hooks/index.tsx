@@ -6,6 +6,7 @@ import {
   QuerySnapshot,
   query,
   where,
+  orderBy,
 } from "firebase/firestore";
 import { db } from "../config";
 
@@ -164,4 +165,22 @@ export const GetOrderDetailsByStudentID = async (studentId: number | null) => {
   );
   const orders = querySnapshot.docs.map((doc) => doc.data());
   return orders;
+};
+
+export const GetNotificationsFromFirebase = async (receiverId: number |null) => {
+  try {
+    const notificationsRef = collection(db, "notifications");
+    const notificationsQuery = query(
+      notificationsRef,
+      where("receiverId", "==", receiverId),
+      orderBy("date", "desc")
+    );
+    const snapshot = await getDocs(notificationsQuery);
+
+    const notifications = snapshot.docs.map((doc) => doc.data());
+    return notifications;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
 };

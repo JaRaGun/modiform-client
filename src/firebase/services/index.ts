@@ -201,7 +201,11 @@ export const CheckIsOrderExist = async (studentId: number | null) => {
   try {
     const userRef = collection(db, "orders");
     const querySnapshot = await getDocs(
-      query(userRef, where("studentId", "==", studentId))
+      query(
+        userRef,
+        where("studentId", "==", studentId),
+        where("status", "==", "approved")
+      )
     );
     return !querySnapshot.empty;
   } catch (error) {
@@ -209,3 +213,4 @@ export const CheckIsOrderExist = async (studentId: number | null) => {
     throw error;
   }
 };
+
